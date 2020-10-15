@@ -1,0 +1,99 @@
+<h1 mat-dialog-title>Dialog für Analge-Bearbeitung</h1>
+<div mat-dialog-content>
+	<mat-toolbar>
+		<mat-toolbar-row>
+			<mat-menu></mat-menu>
+			<span>Liste der Anlagen</span>
+			<span class="menu-spacer"></span>
+			<b>
+				<button mat-mini-fab color="primary" style="margin-left: 10px;">
+					<mat-icon>add</mat-icon>
+				</button>
+				<button mat-mini-fab color="primary" style="margin-left: 10px;">
+					<mat-icon>content_copy</mat-icon>
+				</button>
+				<button mat-mini-fab color="primary" style="margin-left: 10px;">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</b>
+		</mat-toolbar-row>
+	</mat-toolbar>
+	<p>
+		<mat-form-field appearance="outline" style="width: 100; ">
+			<mat-label>EWID</mat-label>
+			<input matInput type="text" value="" />
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field appearance="outline" style="width: 300px; ">
+			<mat-label>Gebäudteil</mat-label>
+			<input matInput type="text" value="Ganzes Gebäude" />
+			<mat-select required>
+				<mat-option>Ganzes Gebäude</mat-option>
+				<mat-option>UG</mat-option>
+				<mat-option>EG</mat-option>
+				<mat-option>1. OG links</mat-option>
+				<mat-option>1. OG mitte</mat-option>
+				<mat-option>1. OG rechts</mat-option>
+				<mat-option>2. OG</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field appearance="outline" style="width: 300px; ">
+			<mat-label>Nutzung</mat-label>
+			<input matInput type="text" value="Allgemein" />
+			<mat-select required>
+				<mat-option>Allgemein</mat-option>
+				<mat-option>Wohnung</mat-option>
+				<mat-option>Büro</mat-option>
+				<mat-option>Werkstatt</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field appearance="outline" style="width: 100; ">
+			<mat-label>Zähler-Nr. 1</mat-label>
+			<input matInput type="text" value="1AEG0000001056" />
+		</mat-form-field>
+		<mat-form-field appearance="outline" style="width: 100; ">
+			<mat-label>Zähler-Nr. 2</mat-label>
+			<input matInput type="text" value="" />
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field appearance="outline" style="width: 300px; height: fit-content;">
+			<mat-label>Eigentümer</mat-label>
+			<textarea matInput value="Herr und Frau
+			Peter Hohler
+		  Birkenweg 15
+		  6560  Neustadt"></textarea>
+		</mat-form-field>
+		<mat-form-field appearance="outline" style="width: 300px; height: fit-content;">
+			<mat-label>Stromkunde</mat-label>
+			<textarea matInput value="Herr und Frau
+			Peter Hohler
+		  Birkenweg 15
+		  6560  Neustadt"></textarea>
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field appearance="outline" style="width: 300px; height: fit-content;">
+			<mat-label>Kontrolleur</mat-label>
+			<textarea matInput value="Zange
+			Elektro AG
+			Brunnmattstrasse 35
+			6560  Neustadt"></textarea>
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field appearance="outline" style="width: 300px; ">
+			<mat-label>Rapport-Nr.</mat-label>
+			<input matInput type="text" value="1212" />
+		</mat-form-field>
+	</p>
+</div>
+<div mat-dialog-actions>
+	<button mat-button mat-dialog-close>Speichern</button>
+	<button mat-button mat-dialog-close>Verwerfen</button>
+</div>

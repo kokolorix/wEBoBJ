@@ -1,0 +1,43 @@
+.projekt{
+    width: 95%;
+    margin: 10px;
+}
+.anlagen{
+}
+
+.head1{
+	background-color: lightgray;
+}
+.grid1{
+	// background-color: dimgray;
+	// display: block !important;
+	// text-align: left;
+	// justify-content: left;
+	border: 1px;
+	border-style: solid;
+	white-space: pre;
+}
+.anlage1{
+    width: 100%;
+    display: flex; 
+    align-items: center;
+}
+.grid2{
+	// background-color: dimgray;
+	text-align: left;
+	white-space: pre;
+	// border: 1px;
+	// border-style: solid;
+}
+
+.projekt-label{
+	text-align: left;
+    width: 100%;
+    color: lightgray;
+}
+
+.projekt-daten{
+	text-align: left;
+    width: 100%;
+	white-space: pre;
+}

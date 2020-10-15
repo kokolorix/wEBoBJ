@@ -1,0 +1,938 @@
+<mat-drawer-container style="height: 100%;">
+	<mat-drawer
+		mwlResizable
+		role="directory"
+		mode="side"
+		position="start"
+		opened="true"
+		fixedTopGap="0"
+		fixedBottomGap="0"
+		styles="box-sizing: border-box;"
+		[enableGhostResize]="false"
+		[resizeEdges]="{ bottom: false, right: true, top: false, left: false }"
+		[ngStyle]="contentDrawerStyles"
+		(resizing)="onResizseContentDrawer($event)"
+		(resizeEnd)="onResizseContentDrawer($event)"
+	>
+		<mat-selection-list [multiple]="false" style="padding-top: 0; padding-bottom: 0; min-width: 264px;">
+			<mat-list-option value="techn_anschlussgesuch" selected="true">Techn. Anschlussgesuch</mat-list-option>
+			<mat-list-option value="lageplan">Lageplan (PDF)</mat-list-option>
+			<mat-list-option value="datenblattWP">Datenblatt WP (PDF)</mat-list-option>
+			<mat-divider></mat-divider>
+			<mat-list-option value="xxx">
+				<mat-icon matListIcon>control_point</mat-icon>
+			</mat-list-option>
+		</mat-selection-list>
+	</mat-drawer>
+	<mat-drawer-content [ngStyle]="contentDrawerContentStyles">
+		<div *ngIf="true" style="height: 100%;">
+			<mat-drawer-container style="height: 100%;">
+				<mat-drawer
+					mwlResizable
+					role="directory"
+					mode="side"
+					position="end"
+					opened="false"
+					fixedTopGap="0"
+					fixedBottomGap="0"
+					[enableGhostResize]="false"
+					[resizeEdges]= "{ bottom: false, right: false, top: false, left: true }"
+					[ngStyle]="navigationDrawerStyles"
+					(resizing)="onResizeNavigationDrawer($event)"
+					(resizeEnd)="onResizeNavigationDrawer($event)"
+				>
+					<mat-selection-list [multiple]="false" style="padding-top: 0; padding-bottom: 0;">
+						<mat-list-option value="OrtDerInstallation" [selected]="currentNavigation === 'OrtDerInstallation'" (click)="scroll('OrtDerInstallation')">Ort der Installation</mat-list-option>
+						<mat-list-option value="AnlageGebaeudeteil" [selected]="currentNavigation === 'AnlageGebaeudeteil'" (click)="scroll('AnlageGebaeudeteil')">Anlage / Gebäudeteil</mat-list-option>
+						<mat-list-option value="AdressenGeschaeftspartner" [selected]="currentNavigation === 'AdressenGeschaeftspartner'" (click)="scroll('AdressenGeschaeftspartner')">Adressen / Geschäftspartner</mat-list-option>
+						<mat-list-option value="Termine" [selected]="currentNavigation === 'Termine'" (click)="scroll('Termine')">Termine</mat-list-option>
+						<mat-list-option value="Geraete" [selected]="currentNavigation === 'Geraete'" (click)="scroll('Geraete')">Geräte</mat-list-option>
+						<mat-list-option value="WeitereAllgemeineAngaben" [selected]="currentNavigation === 'WeitereAllgemeineAngaben'" (click)="scroll('WeitereAllgemeineAngaben')">Weitere allgemeine Angaben</mat-list-option>
+					</mat-selection-list>
+				</mat-drawer>
+				<mat-drawer-content
+					style="padding: 0.5rem;"
+					[ngStyle]="navigationDrawerContentStyles"
+				>
+					<div style="display: flex; width: 100%; justify-content: flex-end; margin-bottom: 0.5rem;">
+						<div>
+
+						</div>
+						<mat-slide-toggle color="primary" [(ngModel)]="allowMulti">Multi</mat-slide-toggle>
+					</div>
+					<div style="width: 768px;">
+						<mat-accordion [multi]="allowMulti">
+							<mat-expansion-panel
+								id="OrtDerInstallation"
+								[expanded]="allowMulti === true || currentNavigation === 'OrtDerInstallation'"
+								(opened)="currentNavigation = 'OrtDerInstallation'"
+							>
+								<mat-expansion-panel-header>Ort der Installation</mat-expansion-panel-header>
+								<div>
+									<p>
+										<mat-form-field>
+											<mat-label>Strasse</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+										<span style="margin-right: 1rem;">&nbsp;</span>
+										<mat-form-field>
+											<mat-label>Nummer</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>PLZ</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+										<span style="margin-right: 1rem;">&nbsp;</span>
+										<mat-form-field>
+											<mat-label>Ort</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Gemeinde</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Parzelle-Nr.</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-radio-group [(ngModel)]="ortAnlageTyp">
+											<mat-radio-button value="neu">neu</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="bestehend">bestehend</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="andere"></mat-radio-button>
+											<mat-form-field *ngIf="ortAnlageTyp == 'andere'">
+												<input matInput type="text" />
+											</mat-form-field>
+										</mat-radio-group>
+									</p>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+						<br/>
+						<mat-accordion [multi]="allowMulti">
+							<mat-expansion-panel
+								id="AnlageGebaeudeteil"
+								[expanded]="allowMulti === true || currentNavigation === 'AnlageGebaeudeteil'"
+								(opened)="currentNavigation = 'AnlageGebaeudeteil'"
+							>
+								<mat-expansion-panel-header>Anlage / Gebäudeteil</mat-expansion-panel-header>
+								<div>
+									<p>
+										<mat-form-field>
+											<mat-label>Zähler-Nr.</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Netzanschluss (HAK)</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>A</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-radio-group [(ngModel)]="anlageGebaeudeTyp">
+											<mat-radio-button value="neu">neu</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="bestehend">bestehend</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="andere"></mat-radio-button>
+											<mat-form-field *ngIf="anlageGebaeudeTyp == 'andere'">
+												<input matInput type="text" />
+											</mat-form-field>
+										</mat-radio-group>
+									</p>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+						<br/>
+						<mat-accordion [multi]="allowMulti">
+							<mat-expansion-panel
+								id="AdressenGeschaeftspartner"
+								[expanded]="allowMulti === true || currentNavigation === 'AdressenGeschaeftspartner'"
+								(opened)="currentNavigation = 'AdressenGeschaeftspartner'"
+							>
+								<mat-expansion-panel-header>Adressen / Geschäftspartner</mat-expansion-panel-header>
+								<div>
+									<p>Einreichendes Unternehmen</p>
+									<mat-divider></mat-divider>
+									<p>
+										<mat-form-field>
+											<mat-label>Name</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Adresse</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Adresszusatz</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>PLZ</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+										<span style="margin-right: 1rem;">&nbsp;</span>
+										<mat-form-field>
+											<mat-label>Ort</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>Sachbearbeiter</p>
+									<mat-divider></mat-divider>
+									<p>
+										<mat-form-field>
+											<mat-label>Name</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>E-Mail</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Telefon</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Fax</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>Eigentümer (Betriebsinhaber)</p>
+									<mat-divider></mat-divider>
+									<p>
+										<mat-form-field>
+											<mat-label>Name</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Adresse</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Adresszusatz</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>PLZ</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+										<span style="margin-right: 1rem;">&nbsp;</span>
+										<mat-form-field>
+											<mat-label>Ort</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>E-Mail</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Telefon</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<span>Sprache</span>
+										<br/>
+										<mat-radio-group>
+											<mat-radio-button value="de">De</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="fr">Fr</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="it">It</mat-radio-button>
+										</mat-radio-group>
+									</p>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+						<br/>
+						<mat-accordion [multi]="allowMulti">
+							<mat-expansion-panel
+								id="Termine"
+								[expanded]="allowMulti === true || currentNavigation === 'Termine'"
+								(opened)="currentNavigation = 'Termine'"
+							>
+								<mat-expansion-panel-header>Termine</mat-expansion-panel-header>
+								<div>
+									<p>
+										<mat-form-field>
+											<mat-label>Voraussichtliche Inbetriebnahme</mat-label>
+											<input matInput [matDatepicker]="dp3">
+											<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+											<mat-datepicker #dp3 disabled="false"></mat-datepicker>
+										</mat-form-field>
+									</p>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+						<br/>
+						<mat-accordion [multi]="allowMulti">
+							<mat-expansion-panel
+								id="Geraete"
+								[expanded]="allowMulti === true || currentNavigation === 'Geraete'"
+								(opened)="currentNavigation = 'Geraete'"
+							>
+								<mat-expansion-panel-header>Geräte</mat-expansion-panel-header>
+								<div>
+									<div style="margin-bottom: 0.5rem;" *ngIf="hatWaermePumpe === false">
+										<button mat-mini-fab color="primary" (click)="hatWaermePumpe = true">
+											<mat-icon>add</mat-icon>
+										</button>
+										<span style="margin-left: 0.5rem; cursor: pointer;" (click)="hatWaermePumpe = true">Elektrische Wärme / Wärmepumpe (WP)</span>
+									</div>
+									<div style="margin-bottom: 0.5rem;" *ngIf="hatEnergieErugungsanlage === false">
+										<button mat-mini-fab color="primary" (click)="hatEnergieErugungsanlage = true">
+											<mat-icon>add</mat-icon>
+										</button>
+										<span style="margin-left: 0.5rem; cursor: pointer;" (click)="hatEnergieErugungsanlage = true">Energieerzeugungsanlagen (EEA)</span>
+									</div>
+									<div style="margin-bottom: 0.5rem;" *ngIf="hatNetzrueckwirkung === false">
+										<button mat-mini-fab color="primary" (click)="hatNetzrueckwirkung = true">
+											<mat-icon>add</mat-icon>
+										</button>
+										<span style="margin-left: 0.5rem; cursor: pointer;" (click)="hatNetzrueckwirkung = true">Anlagen mit Netzrückwirkungen</span>
+									</div>
+									<div style="margin-bottom: 0.5rem;" *ngIf="hatEnergiespeicher === false">
+										<button mat-mini-fab color="primary" (click)="hatEnergiespeicher = true">
+											<mat-icon>add</mat-icon>
+										</button>
+										<span style="margin-left: 0.5rem; cursor: pointer;" (click)="hatEnergiespeicher = true">Energiespeicher</span>
+									</div>
+									<div style="margin-bottom: 0.5rem;" *ngIf="hatLadestation === false">
+										<button mat-mini-fab color="primary"  (click)="hatLadestation = true">
+											<mat-icon>add</mat-icon>
+										</button>
+										<span style="margin-left: 0.5rem; cursor: pointer;" (click)="hatLadestation = true">Ladestationen für Elektrofahrzeuge</span>
+									</div>
+								</div>
+								<div>
+									<div *ngIf="false" style="margin-top: 1.5rem;">
+										<div style="display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;">
+											<h3 style="padding: 0; margin: 0; height: fit-content;">Elektrische Wärme / Wärmepumpe (WP)</h3>
+											<button mat-mini-fab color="warn" (click)="hatWaermePumpe = false">
+												<mat-icon>delete</mat-icon>
+											</button>
+										</div>
+										<hr/>
+										<p>
+											<b>Allgemein</b>
+										</p>
+										<p>
+											<mat-radio-group>
+												<mat-radio-button value="neu">Neuanlage</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="aenderung">Änderung/Erweiterung</mat-radio-button>
+											</mat-radio-group>
+										</p>
+										<p>
+											<span style="margin-right: 1rem;">Kantonale Genehmigung vorhanden</span>
+											<mat-checkbox>Ja</mat-checkbox>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Art des Gerätes/Anlage</mat-label>
+												<input matInput type="text"/>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Gerätehersteller</mat-label>
+												<input matInput type="text"/>
+											</mat-form-field>
+										</p>
+										<p>
+											<span>Art des Betriebs</span>
+											<br/>
+											<mat-radio-group>
+												<mat-radio-button value="monovalent">monovalent</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="bivalent">bivalent</mat-radio-button>
+											</mat-radio-group>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Gerätetyp</mat-label>
+												<input matInput type="text"/>
+											</mat-form-field>
+										</p>
+										<p>
+											<b>Gerätedaten Seite AC</b>
+										</p>
+										<p>
+											<span>Anschluss</span>
+											<br/>
+											<mat-radio-group>
+												<mat-radio-button value="3x400V">3x400V</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="1x230V">1x230V</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="andere">Andere</mat-radio-button>
+											</mat-radio-group>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Nennstrom Gerät</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>A</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Anlaufstrom Gerät (10ms)</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>A</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Anzahl Geräte</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>Stk</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Nennleistung Gerät</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>kW/kVA</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Nennleistung Total</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>kW/kVA</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Spitzenleistung Total</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>kW/kVA</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-card>
+												<b>Spezifikationen</b>
+												<mat-card-content>
+													<p>
+														<span>Anlaufart</span>
+														<br/>
+														<mat-radio-group>
+															<mat-radio-button value="Direktanlauf">Direktanlauf</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="Widerstandsanlasser">Widerstandsanlasser</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="Inverter">Inverter</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="Frequenzumformer">Frequenzumformer</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="Sanftanlasser">Sanftanlasser</mat-radio-button>
+														</mat-radio-group>
+													</p>
+													<p>
+														<span style="margin-right: 1rem;">Elektrische Zusatzheizung</span>
+														<br/>
+														<mat-radio-group [(ngModel)]="elektrischeWaermepumpeZusatzheitzung">
+															<mat-radio-button value="nein">Nein</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="ja">Ja</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-form-field *ngIf="elektrischeWaermepumpeZusatzheitzung == 'ja'">
+																<mat-label>Leistung</mat-label>
+																<input matInput type="text"/>
+																<span matSuffix>kW</span>
+															</mat-form-field>
+														</mat-radio-group>
+													</p>
+													<p>
+														<span>Wärmepumpentyp</span>
+														<br/>
+														<mat-radio-group>
+															<mat-radio-button value="SoleWasser">Sole / Wasser</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="WasserWasser">Wasser / Wasser</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="LuftLuft">Luft / Luft</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="LuftWasser">Luft / Wasser</mat-radio-button>
+														</mat-radio-group>
+													</p>
+													<p>
+														<span>Art der Wassererwärmung</span>
+														<br/>
+														<mat-radio-group>
+															<mat-radio-button value="Elektrisch">Elektrisch</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="Waermepumpenboiler">Wärmepumpenboiler</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="Waermepumpe">Wärmepumpe</mat-radio-button>
+															<span style="margin-right: 1rem;">&nbsp;</span>
+															<mat-radio-button value="Sonnenkollektoren">Sonnenkollektoren</mat-radio-button>
+														</mat-radio-group>
+													</p>
+												</mat-card-content>
+											</mat-card>
+										</p>
+										<!-- <p>
+											<b>Spezifikationen</b>
+										</p>
+										<p>
+											<span>Anlaufart</span>
+											<br/>
+											<mat-radio-group>
+												<mat-radio-button value="Direktanlauf">Direktanlauf</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="Widerstandsanlasser">Widerstandsanlasser</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="Inverter">Inverter</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="Frequenzumformer">Frequenzumformer</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="Sanftanlasser">Sanftanlasser</mat-radio-button>
+											</mat-radio-group>
+										</p>
+										<p>
+											<span style="margin-right: 1rem;">Elektrische Zusatzheizung</span>
+											<br/>
+											<mat-radio-group [(ngModel)]="elektrischeWaermepumpeZusatzheitzung">
+												<mat-radio-button value="nein">Nein</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="ja">Ja</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-form-field *ngIf="elektrischeWaermepumpeZusatzheitzung == 'ja'">
+													<mat-label>Leistung</mat-label>
+													<input matInput type="text"/>
+													<span matSuffix>kW</span>
+												</mat-form-field>
+											</mat-radio-group>
+										</p>
+										<p>
+											<span>Wärmepumpentyp</span>
+											<br/>
+											<mat-radio-group>
+												<mat-radio-button value="SoleWasser">Sole / Wasser</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="WasserWasser">Wasser / Wasser</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="LuftLuft">Luft / Luft</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="LuftWasser">Luft / Wasser</mat-radio-button>
+											</mat-radio-group>
+										</p>
+										<p>
+											<span>Art der Wassererwärmung</span>
+											<br/>
+											<mat-radio-group>
+												<mat-radio-button value="Elektrisch">Elektrisch</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="Waermepumpenboiler">Wärmepumpenboiler</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="Waermepumpe">Wärmepumpe</mat-radio-button>
+												<span style="margin-right: 1rem;">&nbsp;</span>
+												<mat-radio-button value="Sonnenkollektoren">Sonnenkollektoren</mat-radio-button>
+											</mat-radio-group>
+										</p> -->
+										<p>
+											<b>Warmwasserspeicher</b>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Anzahl</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>Stk</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Inhalt</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>l</span>
+											</mat-form-field>
+										</p>
+										<p>
+											<mat-form-field>
+												<mat-label>Gesamtleistung</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>kW</span>
+											</mat-form-field>
+										</p>
+									</div>
+									<div *ngIf="hatEnergieErugungsanlage === true" style="margin-top: 1.5rem;">
+										<div style="display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;">
+											<h3 style="padding: 0; margin: 0; height: fit-content;">Energieerzeugungsanlagen (EEA)</h3>
+											<button mat-mini-fab color="warn" (click)="hatEnergieErugungsanlage = false">
+												<mat-icon>delete</mat-icon>
+											</button>
+										</div>
+										<hr/>
+									</div>
+									<div *ngIf="hatNetzrueckwirkung === true" style="margin-top: 1.5rem;">
+										<div style="display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;">
+											<h3 style="padding: 0; margin: 0; height: fit-content;">Anlagen mit Netzrückwirkungen</h3>
+											<button mat-mini-fab color="warn" (click)="hatNetzrueckwirkung = false">
+												<mat-icon>delete</mat-icon>
+											</button>
+										</div>
+										<hr/>
+									</div>
+									<div *ngIf="hatEnergiespeicher === true" style="margin-top: 1.5rem;">
+										<div style="display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;">
+											<h3 style="padding: 0; margin: 0; height: fit-content;">Energiespeicher</h3>
+											<button mat-mini-fab color="warn" (click)="hatEnergiespeicher = false">
+												<mat-icon>delete</mat-icon>
+											</button>
+										</div>
+										<hr/>
+									</div>
+									<div *ngIf="hatLadestation === true" style="margin-top: 1.5rem;">
+										<div style="display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;">
+											<h3 style="padding: 0; margin: 0; height: fit-content;">Ladestationen für Elektrofahrzeuge</h3>
+											<button mat-mini-fab color="warn" (click)="hatLadestation = false">
+												<mat-icon>delete</mat-icon>
+											</button>
+										</div>
+										<hr/>
+									</div>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+						<br *ngIf="hatWaermePumpe === true"/>
+						<mat-accordion [multi]="allowMulti" *ngIf="hatWaermePumpe === true">
+							<mat-expansion-panel
+								id="geraetWaermepumpe"
+								[expanded]="allowMulti === true"
+							>
+								<mat-expansion-panel-header>
+									<div style="display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;">
+										<h3 style="padding: 0; margin: 0; height: fit-content;">Elektrische Wärme / Wärmepumpe (WP)</h3>
+										<button mat-mini-fab color="warn" (click)="hatWaermePumpe = false">
+											<mat-icon>delete</mat-icon>
+										</button>
+									</div>
+									<hr/>
+								</mat-expansion-panel-header>
+								<div style="margin-top: 1.5rem;">
+									<!-- <div style="display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;">
+										<h3 style="padding: 0; margin: 0; height: fit-content;">Elektrische Wärme / Wärmepumpe (WP)</h3>
+										<button mat-mini-fab color="warn" (click)="hatWaermePumpe = false">
+											<mat-icon>delete</mat-icon>
+										</button>
+									</div>
+									<hr/> -->
+									<p>
+										<b>Allgemein</b>
+									</p>
+									<p>
+										<mat-radio-group>
+											<mat-radio-button value="neu">Neuanlage</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="aenderung">Änderung/Erweiterung</mat-radio-button>
+										</mat-radio-group>
+									</p>
+									<p>
+										<span style="margin-right: 1rem;">Kantonale Genehmigung vorhanden</span>
+										<mat-checkbox>Ja</mat-checkbox>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Art des Gerätes/Anlage</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Gerätehersteller</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<span>Art des Betriebs</span>
+										<br/>
+										<mat-radio-group>
+											<mat-radio-button value="monovalent">monovalent</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="bivalent">bivalent</mat-radio-button>
+										</mat-radio-group>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Gerätetyp</mat-label>
+											<input matInput type="text"/>
+										</mat-form-field>
+									</p>
+									<p>
+										<b>Gerätedaten Seite AC</b>
+									</p>
+									<p>
+										<span>Anschluss</span>
+										<br/>
+										<mat-radio-group>
+											<mat-radio-button value="3x400V">3x400V</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="1x230V">1x230V</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="andere">Andere</mat-radio-button>
+										</mat-radio-group>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Nennstrom Gerät</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>A</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Anlaufstrom Gerät (10ms)</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>A</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Anzahl Geräte</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>Stk</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Nennleistung Gerät</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>kW/kVA</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Nennleistung Total</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>kW/kVA</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Spitzenleistung Total</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>kW/kVA</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-card>
+											<b>Spezifikationen</b>
+											<mat-card-content>
+												<p>
+													<span>Anlaufart</span>
+													<br/>
+													<mat-radio-group>
+														<mat-radio-button value="Direktanlauf">Direktanlauf</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="Widerstandsanlasser">Widerstandsanlasser</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="Inverter">Inverter</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="Frequenzumformer">Frequenzumformer</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="Sanftanlasser">Sanftanlasser</mat-radio-button>
+													</mat-radio-group>
+												</p>
+												<p>
+													<span style="margin-right: 1rem;">Elektrische Zusatzheizung</span>
+													<br/>
+													<mat-radio-group [(ngModel)]="elektrischeWaermepumpeZusatzheitzung">
+														<mat-radio-button value="nein">Nein</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="ja">Ja</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-form-field *ngIf="elektrischeWaermepumpeZusatzheitzung == 'ja'">
+															<mat-label>Leistung</mat-label>
+															<input matInput type="text"/>
+															<span matSuffix>kW</span>
+														</mat-form-field>
+													</mat-radio-group>
+												</p>
+												<p>
+													<span>Wärmepumpentyp</span>
+													<br/>
+													<mat-radio-group>
+														<mat-radio-button value="SoleWasser">Sole / Wasser</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="WasserWasser">Wasser / Wasser</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="LuftLuft">Luft / Luft</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="LuftWasser">Luft / Wasser</mat-radio-button>
+													</mat-radio-group>
+												</p>
+												<p>
+													<span>Art der Wassererwärmung</span>
+													<br/>
+													<mat-radio-group>
+														<mat-radio-button value="Elektrisch">Elektrisch</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="Waermepumpenboiler">Wärmepumpenboiler</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="Waermepumpe">Wärmepumpe</mat-radio-button>
+														<span style="margin-right: 1rem;">&nbsp;</span>
+														<mat-radio-button value="Sonnenkollektoren">Sonnenkollektoren</mat-radio-button>
+													</mat-radio-group>
+												</p>
+											</mat-card-content>
+										</mat-card>
+									</p>
+									<!-- <p>
+										<b>Spezifikationen</b>
+									</p>
+									<p>
+										<span>Anlaufart</span>
+										<br/>
+										<mat-radio-group>
+											<mat-radio-button value="Direktanlauf">Direktanlauf</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="Widerstandsanlasser">Widerstandsanlasser</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="Inverter">Inverter</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="Frequenzumformer">Frequenzumformer</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="Sanftanlasser">Sanftanlasser</mat-radio-button>
+										</mat-radio-group>
+									</p>
+									<p>
+										<span style="margin-right: 1rem;">Elektrische Zusatzheizung</span>
+										<br/>
+										<mat-radio-group [(ngModel)]="elektrischeWaermepumpeZusatzheitzung">
+											<mat-radio-button value="nein">Nein</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="ja">Ja</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-form-field *ngIf="elektrischeWaermepumpeZusatzheitzung == 'ja'">
+												<mat-label>Leistung</mat-label>
+												<input matInput type="text"/>
+												<span matSuffix>kW</span>
+											</mat-form-field>
+										</mat-radio-group>
+									</p>
+									<p>
+										<span>Wärmepumpentyp</span>
+										<br/>
+										<mat-radio-group>
+											<mat-radio-button value="SoleWasser">Sole / Wasser</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="WasserWasser">Wasser / Wasser</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="LuftLuft">Luft / Luft</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="LuftWasser">Luft / Wasser</mat-radio-button>
+										</mat-radio-group>
+									</p>
+									<p>
+										<span>Art der Wassererwärmung</span>
+										<br/>
+										<mat-radio-group>
+											<mat-radio-button value="Elektrisch">Elektrisch</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="Waermepumpenboiler">Wärmepumpenboiler</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="Waermepumpe">Wärmepumpe</mat-radio-button>
+											<span style="margin-right: 1rem;">&nbsp;</span>
+											<mat-radio-button value="Sonnenkollektoren">Sonnenkollektoren</mat-radio-button>
+										</mat-radio-group>
+									</p> -->
+									<p>
+										<b>Warmwasserspeicher</b>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Anzahl</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>Stk</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Inhalt</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>l</span>
+										</mat-form-field>
+									</p>
+									<p>
+										<mat-form-field>
+											<mat-label>Gesamtleistung</mat-label>
+											<input matInput type="text"/>
+											<span matSuffix>kW</span>
+										</mat-form-field>
+									</p>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+						<br/>
+						<mat-accordion [multi]="allowMulti">
+							<mat-expansion-panel
+								id="WeitereAllgemeineAngaben"
+								[expanded]="allowMulti === true || currentNavigation === 'WeitereAllgemeineAngaben'"
+								(opened)="currentNavigation = 'WeitereAllgemeineAngaben'"
+							>
+								<mat-expansion-panel-header>Weitere allgemeine Angaben</mat-expansion-panel-header>
+								<div>
+									<p>
+										<mat-form-field style="width: 100%;">
+											<mat-label>Bemerkungen des einreichenden Unternehmens</mat-label>
+											<textarea matInput></textarea>
+										 </mat-form-field>
+									</p>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+					</div>
+				</mat-drawer-content>
+			</mat-drawer-container>
+		</div>
+		<div *ngIf="false">
+			<p>formular-prototyp works!</p>
+		</div>
+	</mat-drawer-content>
+</mat-drawer-container>

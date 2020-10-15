@@ -1,0 +1,24 @@
+.menu-spacer {
+	flex: 1 1 auto;
+}
+
+.closeButton {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  line-height: 30px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 3px;
+  transition: background 0.15s linear;
+  display: block;
+  margin-left: 10px;
+}
+
+// .example-chip-list {
+// 	width: 100%;
+//  }

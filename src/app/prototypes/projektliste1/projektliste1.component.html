@@ -1,0 +1,33 @@
+<div style="display: flex;flex-wrap: wrap;">
+
+    <mat-card *ngFor="let kat of kategorien" class="card-style">
+      <mat-card-header>
+        <mat-card-title>{{kat.text}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-grid-list cols="6" rowHeight="50">
+          <mat-grid-tile *ngFor="let t of titel" [colspan]="t.cols" [rowspan]="t.rows" [class]="t.klasse">
+            <div [style]="t.inStyle">
+              <button disabled mat-icon-button *ngIf="t.icon" color="primary">
+                <mat-icon>{{t.icon}}</mat-icon>
+              </button>
+              <div>{{t.text}}</div>
+            </div>
+          </mat-grid-tile>
+  
+          <mat-grid-tile *ngFor="let l of leistungen" [colspan]="l.cols" [rowspan]="l.rows" [class]="l.klasse">
+            <div [style]="l.inStyle">
+              <button mat-icon-button *ngIf="l.icon" color="primary" routerLink="/prototyp-projekt3">
+                <mat-icon>{{l.icon}}</mat-icon>
+              </button>
+              <div>{{l.text}}</div>
+             <div style="flex: 1 1 auto;"></div>             
+              <div *ngIf="l.cols === 2" style="align-self: baseline; margin-right: 5px;">
+                <span class="auftragsart">Bauprojekt</span></div>
+            </div>
+          </mat-grid-tile>
+  
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+  </div>

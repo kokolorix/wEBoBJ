@@ -1,0 +1,68 @@
+<div style="width: 100%;">
+<mat-card class="projekt">
+    <mat-card-header>
+        <mat-card-title>Projekt</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-grid-list cols="6" rowHeight="50">
+            <mat-grid-tile colspan="2" rowspan="2"><img src="https://static.bkw.ch/bf-engine/1.x.x/themes/bkw/icon.svg" /></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Adresse</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Gebäudeart</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Gemeinde</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Parzellen-Nr.</div></mat-grid-tile>
+
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">Eine Strasse 13
+2121 Ein Ort</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">Chalet</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">Es Dorf</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">44778899</div></mat-grid-tile>
+
+            <mat-grid-tile colspan="2" rowspan="2"></mat-grid-tile>
+            
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Projektart</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Auftrags-Nr.</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Stichwort</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-label">Inbetriebnahme am</div></mat-grid-tile>
+
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">Bauprojekt</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">A-001</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">Holdrio</div></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1"><div class="projekt-daten">07.07.2077</div></mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="projekt anlagen">
+    <mat-card-header>
+        <mat-card-title>Anlagen</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-grid-list cols="6" rowHeight="50">
+
+            <mat-grid-tile *ngFor="let t of titel" [colspan]="t.cols" [rowspan]="t.rows" [class]="t.klasse">
+                <div [style]="t.inStyle">
+                    <button disabled mat-icon-button *ngIf="t.icon" color="primary">
+                        <mat-icon>{{t.icon}}</mat-icon>
+                    </button>
+                    <div>{{t.text}}</div>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile *ngFor="let a of anlagen" [colspan]="a.cols" [rowspan]="a.rows" [class]="a.klasse">
+                <div [style]="a.inStyle">
+                    <button mat-icon-button *ngIf="istAnlage(a.icon)" color="primary" (click)="openAnlagetDialog()">
+                        <mat-icon>{{a.icon}}</mat-icon>
+                    </button>
+                    <button mat-icon-button *ngIf='istFormular(a.icon)' color="primary"
+                        routerLink="/prototyp-formular1">
+                        <mat-icon>{{a.icon}}</mat-icon>
+                    </button>
+                    <div>{{a.text}}</div>
+                    <div style="flex: 1 1 auto;"></div>
+                </div>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>
+</div>
