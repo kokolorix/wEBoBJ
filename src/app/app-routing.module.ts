@@ -8,29 +8,33 @@ import { Projektliste1Component } from './prototypes/projektliste1/projektliste1
 
 const routes: Routes = [
   {
-		path: 'prototyp-formular1',
+		path: 'formular1',
 		component: Formular1Component
 	},
 	{
-		path: 'prototyp-projekt1',
+		path: 'projekt1',
 		component: Projekt1Component
 	},
 	{
-		path: 'prototyp-projekt2',
+		path: 'projekt2',
 		component: Projekt2Component
 	},
 	{
-		path: 'prototyp-projekt3',
+		path: 'projekt3',
 		component: Projekt3Component
 	},
 	{
-		path: 'prototyp-projektliste1',
-    component: Projektliste1Component	
+		path: 'projektliste1',
+    component: Projektliste1Component
   },
+  {
+		path: '**',
+		redirectTo: "home"
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes, { useHash: true })],
+	exports: [RouterModule]
 })
 export class AppRoutingModule { }

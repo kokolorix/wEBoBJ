@@ -22,7 +22,7 @@ $warnPalette:    mat-palette($mat-red);
 .card-style{
 	width: 90%;
     min-width: 300px;
-    max-width: 1000px;
+    max-width: 700px;
     margin: 10px;
     margin-right: 0;
 }
@@ -41,7 +41,9 @@ $warnPalette:    mat-palette($mat-red);
 .grid2{
 	// background-color: dimgray;
 	text-align: left;
-	white-space: pre;
+  white-space: pre;
+  border-style: solid;
+  border: 1px;
 	// border: 1px;
 	// border-style: solid;
 }
