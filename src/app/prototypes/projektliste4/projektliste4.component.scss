@@ -1,13 +1,19 @@
 @import '/src/styles.scss';
 
 
-tr.projekt-liste-row:not(.projekt-liste-row):hover {
-	background: $hoovered;
+tr.projekt-liste-row:hover {
+  background: $bgHoovered;
+  cursor: pointer;
  }
 
- tr.projekt-liste-row:not(.projekt-liste-row):active {
-	background: $selected;
- }
+//  tr.projekt-liste-row:active {
+//   background: $bgSelected;
+//   color: $fgSelected;
+//  }
+//  th.mat-header-cell:activ {
+//    background: $bgSelected;
+//   color: $fgSelected;  
+//  }
 
 table {
   width: 100%;
