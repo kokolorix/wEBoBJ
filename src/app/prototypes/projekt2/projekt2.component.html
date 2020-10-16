@@ -4,7 +4,7 @@
 	</button>
 	<span>ElektroForm Projekte</span>
 	<span class="menu-spacer"></span>
-	<button mat-icon-button  routerLink="/prototyp-projektliste1">
+	<button mat-icon-button  routerLink="/projektliste1">
 		<mat-icon>arrow_upward</mat-icon>
 	</button>
 </mat-toolbar-row>
@@ -97,7 +97,7 @@
 				<ng-container matColumnDef="TAG">
 					<th mat-header-cell *matHeaderCellDef class="formHeader"> TAG </th>
 					<td mat-cell *matCellDef="let e">
-						<button mat-icon-button class="hasButton" *ngIf="e.tag" routerLink="/prototyp-formular1">
+						<button mat-icon-button class="hasButton" *ngIf="e.tag" routerLink="/formular1">
 							<mat-icon>texture</mat-icon>
 						</button>
 						<button mat-icon-button class="addButton" *ngIf="!e.tag">
@@ -109,7 +109,7 @@
 				<ng-container matColumnDef="IA">
 					<th mat-header-cell *matHeaderCellDef class="formHeader"> IA </th>
 					<td mat-cell *matCellDef="let e">
-						<button mat-icon-button class="hasButton" *ngIf="e.ia" routerLink="/prototyp-formular1">
+						<button mat-icon-button class="hasButton" *ngIf="e.ia" routerLink="/formular1">
 							<mat-icon>texture</mat-icon>
 						</button>
 						<button mat-icon-button class="addButton" *ngIf="!e.ia">
@@ -121,7 +121,7 @@
 				<ng-container matColumnDef="AB">
 					<th mat-header-cell *matHeaderCellDef class="formHeader"> AB </th>
 					<td mat-cell *matCellDef="let e">
-						<button mat-icon-button class="hasButton" *ngIf="e.ab" routerLink="/prototyp-formular1">
+						<button mat-icon-button class="hasButton" *ngIf="e.ab" routerLink="/formular1">
 							<mat-icon>texture</mat-icon>
 						</button>
 						<button mat-icon-button class="addButton" *ngIf="!e.ab">
@@ -133,7 +133,7 @@
 				<ng-container matColumnDef="SiNa">
 					<th mat-header-cell *matHeaderCellDef class="formHeader"> SiNa </th>
 					<td mat-cell *matCellDef="let e">
-						<button mat-icon-button class="hasButton" *ngIf="e.sina" routerLink="/prototyp-formular1">
+						<button mat-icon-button class="hasButton" *ngIf="e.sina" routerLink="/formular1">
 							<mat-icon>texture</mat-icon>
 						</button>
 						<button mat-icon-button class="addButton" *ngIf="!e.sina">

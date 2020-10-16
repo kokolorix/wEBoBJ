@@ -14,19 +14,19 @@
               <div>{{t.text}}</div>
             </div>
           </mat-grid-tile>
-  
+
           <mat-grid-tile *ngFor="let l of leistungen" [colspan]="l.cols" [rowspan]="l.rows" [class]="l.klasse">
             <div [style]="l.inStyle">
-              <button mat-icon-button *ngIf="l.icon" color="primary" routerLink="/prototyp-projekt3">
+              <button mat-icon-button *ngIf="l.icon" color="primary" routerLink="/projekt3">
                 <mat-icon>{{l.icon}}</mat-icon>
               </button>
               <div>{{l.text}}</div>
-             <div style="flex: 1 1 auto;"></div>             
+             <div style="flex: 1 1 auto;"></div>
               <div *ngIf="l.cols === 2" style="align-self: baseline; margin-right: 5px;">
                 <span class="auftragsart">Bauprojekt</span></div>
             </div>
           </mat-grid-tile>
-  
+
         </mat-grid-list>
       </mat-card-content>
     </mat-card>
