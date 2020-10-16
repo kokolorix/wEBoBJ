@@ -1,0 +1,42 @@
+@import '/src/styles.scss';
+
+
+tr.projekt-liste-row:not(.projekt-liste-row):hover {
+	background: $hoovered;
+ }
+
+ tr.projekt-liste-row:not(.projekt-liste-row):active {
+	background: $selected;
+ }
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+// td, th {
+//   width: 25%;
+// }
+
+.theme{
+  background-color:$bgColor;
+}
+
+.rand-aussen {
+  margin: $edge;
+  // border: 2px solid red;
+}
+
+.rand-innen {
+  padding: $edge;
+  // border: 2px solid red;
+}
+
+.alles {
+  width: 100%;
+  height: 100%;
+}

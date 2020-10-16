@@ -1,0 +1,12 @@
+<nav>
+	<mat-toolbar color="primary">
+		<img src="/assets/elektroform-logo-white.svg"/>
+		<span class="spacer"></span>
+		<button mat-stroked-button [matMenuTriggerFor]="languageMenu">
+			<span i18n>{{ language != null ? language : "Sprache" }}</span>
+		</button>
+		<mat-menu #languageMenu="matMenu" xPosition="before">
+			<button mat-menu-item *ngFor="let language of languages" (click)="changeLanguage(language)">{{language}}</button>
+		</mat-menu>
+	</mat-toolbar>
+</nav>
