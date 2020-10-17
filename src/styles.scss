@@ -6,5 +6,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 $bgColor: lightblue;
 $edge : 0.8rem;
 
-$hoovered : lightblue;
-$selected : darkblue;
+$bgHoovered : lightblue;
+$bgSelected : darkblue;
+$fgSelected : lightblue;
