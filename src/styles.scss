@@ -9,3 +9,18 @@ $edge : 0.8rem;
 $bgHoovered : lightblue;
 $bgSelected : darkblue;
 $fgSelected : lightblue;
+
+// $stWorking : blue
+
+.stWorking{
+  background-color: lightgray;
+}
+.stSent{
+  background-color: lightsalmon;
+}
+.stReceived{
+  background-color: lightpink;
+}
+.stApproved {
+  background-color: lightgreen;
+}

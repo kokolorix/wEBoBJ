@@ -1,5 +1,12 @@
 @import '/src/styles.scss';
 
+tr.mat-row{
+  height: 2.4rem;
+}
+
+.vnbLogo{
+  height: 1.3rem;;
+}
 
 tr.projekt-liste-row:hover {
   background: $bgHoovered;
@@ -12,7 +19,7 @@ tr.projekt-liste-row:hover {
 //  }
 //  th.mat-header-cell:activ {
 //    background: $bgSelected;
-//   color: $fgSelected;  
+//   color: $fgSelected;
 //  }
 
 table {
@@ -29,7 +36,7 @@ table {
 // }
 
 .theme{
-  background-color:$bgColor;
+  background-color: rgb(247, 236, 215);
 }
 
 .rand-aussen {
@@ -45,4 +52,25 @@ table {
 .alles {
   width: 100%;
   height: 100%;
+}
+
+.align {
+  display: flex;
+  // flex-wrap: nowrap;
+  align-items: center;
+  // vertical-align: middle;
+  // align-content: center;
+  justify-content: center;
+}
+
+.status{
+  min-width: 4rem;
+  margin: 0.35rem;
+  padding: 0.2rem;
+  margin-right: 0.2rem;
+  // border: darkblue;
+  // border-width: 1px;
+  border-radius: 0.5rem;
+  // border-style: solid;
+  // white-space: pre;
 }
