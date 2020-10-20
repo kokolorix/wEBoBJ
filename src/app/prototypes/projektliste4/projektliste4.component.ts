@@ -23,12 +23,14 @@ export interface Projekt{
   templateUrl: './projektliste4.component.html',
   styleUrls: ['./projektliste4.component.scss']
 })
-export class Projektliste4Component implements OnInit {  
+export class Projektliste4Component implements OnInit {
   displayedColumns: string[] = ['titel', 'art', 'vnb', 'status'];
   dataSource: MatTableDataSource<Projekt>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  expandedElement:Projekt | null;
 
   constructor() {
       // Create 100 users
