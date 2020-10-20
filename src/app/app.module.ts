@@ -48,6 +48,12 @@ import { Formular1Component } from './prototypes/formular1/formular1.component';
 
 import { ResizableModule } from 'angular-resizable-element';
 import { Projekt3Component } from './prototypes/projekt3/projekt3.component';
+import { Anlage4Component } from './prototypes/anlage4/anlage4.component';
+import { Formular4Component } from './prototypes/formular4/formular4.component';
+import { Projekt4Component } from './prototypes/projekt4/projekt4.component';
+import { Projektliste4Component } from './prototypes/projektliste4/projektliste4.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -59,7 +65,13 @@ import { Projekt3Component } from './prototypes/projekt3/projekt3.component';
     AnlageDialogComponent,
     Formular1Component,
     Projektliste1Component,
-    Projekt3Component
+    Projekt3Component,
+    Anlage4Component,
+    Formular4Component,
+    Projekt4Component,
+    Projektliste4Component,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

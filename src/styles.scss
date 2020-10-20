@@ -2,3 +2,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$bgColor: lightblue;
+$edge : 0.8rem;
+
+$bgHoovered : lightblue;
+$bgSelected : darkblue;
+$fgSelected : lightblue;
+
+// $stWorking : blue
+
+.stWorking{
+  background-color: lightgray;
+}
+.stSent{
+  background-color: lightsalmon;
+}
+.stReceived{
+  background-color: lightpink;
+}
+.stApproved {
+  background-color: lightgreen;
+}
