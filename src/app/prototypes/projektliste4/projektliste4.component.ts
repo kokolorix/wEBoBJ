@@ -58,8 +58,8 @@ export class Projektliste4Component implements OnInit {
     }
   }
 
-  openProjektDetail() : void {
-
+  openProjektDetail(row:Projekt) : void {
+    this.expandedElement = this.expandedElement === row ? null : row
   }
 }
 
