@@ -47,7 +47,7 @@ const routes: Routes = [
 		component: Formular4Component
 	},
 	{
-		path: 'projekt4',
+		path: 'projekt4/:id',
 		component: Projekt4Component
 	},
 	{

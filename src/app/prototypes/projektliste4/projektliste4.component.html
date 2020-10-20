@@ -49,7 +49,8 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="projekt-liste-row"
             [class.example-expanded-row]="expandedElement === row"
-            (click)="openProjektDetail(row)">
+            [routerLink]="['/projekt4', row?.id]">
+            <!-- (click)="openProjektDetail(row)"> -->
               <!-- (click)="openProjektDetail()"></tr> -->
 
             <!-- Row shown when there is no matching data. -->

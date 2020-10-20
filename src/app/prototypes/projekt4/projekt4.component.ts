@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import {Status, Projekt} from 'src/app/shared/projekt.interface'
+import {ProjektService} from 'src/app/shared/projekt.service'
 
 @Component({
   selector: 'app-projekt4',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Projekt4Component implements OnInit {
 
-  constructor() { }
+  public projekt : Projekt;
 
-  ngOnInit(): void {
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly projektService: ProjektService,
+  ) {}
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      this.projekt = this.projektService.getProjektById(parseFloat(params.id));
+    });
   }
-
 }
