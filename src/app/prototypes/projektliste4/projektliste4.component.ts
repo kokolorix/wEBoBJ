@@ -17,12 +17,13 @@ export interface Projekt{
   status:Status[];
 }
 
+
 @Component({
   selector: 'app-projektliste4',
   templateUrl: './projektliste4.component.html',
   styleUrls: ['./projektliste4.component.scss']
 })
-export class Projektliste4Component implements OnInit {
+export class Projektliste4Component implements OnInit {  
   displayedColumns: string[] = ['titel', 'art', 'vnb', 'status'];
   dataSource: MatTableDataSource<Projekt>;
 
@@ -36,6 +37,7 @@ export class Projektliste4Component implements OnInit {
       // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(projekte);
    }
+
 
   ngOnInit(): void {
   }
