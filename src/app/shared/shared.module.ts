@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StandortDialogComponent } from './standort-dialog/standort-dialog.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [StandortDialogComponent],
   imports: [
     CommonModule
   ]

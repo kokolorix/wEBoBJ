@@ -3,14 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import {Status, Projekt} from 'src/app/shared/projekt.interface'
 import {ProjektService} from 'src/app/shared/projekt.service'
 import { ResizeEvent } from 'angular-resizable-element';
-
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
-// import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import { StandortDialogComponent } from 'src/app/shared/standort-dialog/standort-dialog.component';
 
 @Component({
   selector: 'app-projekt4',
@@ -32,9 +26,12 @@ export class Projekt4Component implements OnInit {
   public gefilterteProjekte : Projekt[];
   public aktuellesProjekt : Projekt;
 
+  public editProjekt: boolean = false; 
+
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly projektService: ProjektService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -50,9 +47,10 @@ export class Projekt4Component implements OnInit {
       }
     });
   }
-
-  selectItem(e:HTMLElement, p:Projekt) : void{
-    this.aktuellesProjekt = p;
+ 
+  editStandort(e:any):void{
+    this.editProjekt = true;
+		// this.dialog.open(StandortDialogComponent);
   }
 
   onResizseContentDrawer(event: ResizeEvent): void {
