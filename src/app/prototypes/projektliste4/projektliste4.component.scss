@@ -8,8 +8,12 @@ tr.mat-row{
   height: 1.3rem;;
 }
 
+.selected{
+  background: $bgHovered;
+}
+
 tr.projekt-liste-row:hover {
-  background: $bgHoovered;
+  background: $bgHovered;
   cursor: pointer;
  }
 

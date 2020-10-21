@@ -7,11 +7,22 @@
       <mat-card-content>
         <mat-form-field>
           <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input value="{{filter}}">
         </mat-form-field>
 
         <div>
           <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef> Details </th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-icon-button color="primary"
+                routerLink="/projekt4/{{row.id}}/{{filter}}/{{projektIds}}"
+                >
+                  <mat-icon>menu</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
             <ng-container matColumnDef="titel">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Projektname </th>
@@ -45,12 +56,17 @@
               </td>
 
             </ng-container>
+            <!-- < p [ngClass] ="' bgcolor--' + color" > Das ist ein Test mit Farbe. </ p
+            [class.example-expanded-row]="expandedElement === row"
+            [routerLink]="['/projekt4', row?.id]"
+            < some-element [ngClass] ="{' class1 class2 class3' : true}" >... </ some-element > Objekt -->
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="projekt-liste-row"
-            [class.example-expanded-row]="expandedElement === row"
-            [routerLink]="['/projekt4', row?.id]">
-            <!-- (click)="openProjektDetail(row)"> -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'selected' : expandedElement === row}"
+            class="projekt-liste-row"
+            (click)="openProjektDetail(row)"
+            >
+            <!-- > -->
               <!-- (click)="openProjektDetail()"></tr> -->
 
             <!-- Row shown when there is no matching data. -->

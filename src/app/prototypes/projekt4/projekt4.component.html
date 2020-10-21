@@ -1,1 +1,41 @@
-<p>projekt4 works!</p>
+<mat-toolbar-row>
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Projekte</span>
+  <button mat-icon-button routerLink="/projektliste4//{{filter}}">
+    <mat-icon>arrow_circle_up</mat-icon>
+  </button>
+  <span>Projekt-Liste</span>
+  <span class="menu-spacer"></span>
+</mat-toolbar-row>
+<mat-drawer-container style="height: 100%;">
+  <mat-drawer mwlResizable #sidenav role="directory" mode="side" position="start" [opened]="navOpen" fixedTopGap="0"
+    fixedBottomGap="0" styles="box-sizing: border-box;" [enableGhostResize]="false"
+    [resizeEdges]="{ bottom: false, right: true, top: false, left: false }" [ngStyle]="contentDrawerStyles"
+    (resizing)="onResizseContentDrawer($event)" (resizeEnd)="onResizseContentDrawer($event)">
+    <mat-selection-list [multiple]=" false" style="padding-top: 0; padding-bottom: 0; min-width: 264px;">
+      <mat-list-option *ngFor="let p of gefilterteProjekte">
+        {{p.titel}}
+      </mat-list-option>
+      <mat-divider></mat-divider>
+      <mat-list-option>
+        <div>
+          <button mat-mini-fab color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
+
+  <mat-drawer-content [ngStyle]="contentDrawerContentStyles">
+    <div *ngIf="true" style="height: 2222px;">
+      <mat-drawer-container style="height: 100%;">
+        <mat-drawer-content>
+        </mat-drawer-content>
+      </mat-drawer-container>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>

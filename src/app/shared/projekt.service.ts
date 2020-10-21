@@ -25,6 +25,10 @@ export class ProjektService {
   public getProjektById(id:number){
     return this.projekte.find(projekt => projekt.id === id);
   }
+
+  public getProjekte(ids: number[]): Projekt[] {
+    return this.projekte.filter(x => ids.indexOf(x.id) >= 0);
+  }
 }
 
 

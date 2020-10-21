@@ -47,11 +47,15 @@ const routes: Routes = [
 		component: Formular4Component
 	},
 	{
-		path: 'projekt4/:id',
+		path: 'projekt4/:id/:filter/:projektIds',
 		component: Projekt4Component
 	},
 	{
 		path: 'projektliste4',
+    component: Projektliste4Component
+  },
+	{
+		path: 'projektliste4/:filter',
     component: Projektliste4Component
   },
   {
