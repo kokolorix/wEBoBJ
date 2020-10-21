@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import {Status, Projekt} from 'src/app/shared/projekt.interface'
+import { Status, Projekt, Standort, Adresse, Anlage, Datum } from 'src/app/shared/projekt.interface'
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -54,6 +54,13 @@ const LEIST_DEFS: string[] = [
 const STATI: string[] = [
   'stWorking','stSent','stReceived','stApproved',
 ]
+const GEB_TEILE: string[] = [
+  'Ganzes Gebäude', '1. OG links', '1. OG rechts', 'Dachstock', 'Hauptgebäude', 'Economie', 'Aula', 'Halle xy',];
+
+const GEB_NUTZUNGEN: string[] = [
+  'Wohnung', 'Einstellhalle', 'Büro', 'Gewerbe', 'Schreinerei', 'Schlosserei', 'Produktion', 'Praxis', 'Verwaltung', 'EDV-Anlage', 'Verkaufslokal', 'Stall', 'Materiallager', 'Allgemein',
+];
+// const XXX   : string[] = [];
 
 function erstelleProjekt(id: number) : Projekt
 {
@@ -72,32 +79,8 @@ function erstelleProjekt(id: number) : Projekt
   const versicherungsNr:number = Math.round(Math.random() * 1000000) + 5478;
   const gebaeudeArt:string = GEB_ARTEN[Math.round(Math.random() * (GEB_ARTEN.length - 1))];
 
-  var status : Status[] = [];
-  var classes = new Set();
-
-  for(let i = 0; i < LEIST_DEFS.length; ++i) {
-    let x = Math.round(Math.random() * 9) ;
-    let def = LEIST_DEFS[i];
-
-    if(x && (x % 2)){
-      const cls : string = STATI[Math.round(Math.random() * (STATI.length - 1))];
-      status.push({titel:`${def}`, icon:`filter_${x}`, class: cls});
-      classes.add(cls);
-    }
-  }
-
-  let statusText:string;
-
-    if(classes.has('stWorking'))
-      statusText = 'In Arbeit';
-    else if(classes.has('stReceived'))
-      statusText = 'Rückmeldung';
-    else if(classes.has('stSent'))
-      statusText = 'Gesendet';
-    else if(classes.has('stApproved'))
-      statusText = 'Abgeschlossen';
-    else
-      statusText = 'Neu'
+  let status =  erstelleSatus();
+  let anlagen =  erstelleAnlagen();
 
   return {
     id: id,
@@ -115,7 +98,62 @@ function erstelleProjekt(id: number) : Projekt
     gebaeudeArt:gebaeudeArt,
     vnb: vnb,
     art: art,
-    statusText: statusText,
-    status: status,
+    statusText: status.text,
+    status: status.stati,
+    anlagen: anlagen,
   }
+}
+
+function erstelleSatus()  : {stati:Status[],  text:string}{
+  let stati : Status[] = [];
+  let classes = new Set();
+
+  for(let i = 0; i < LEIST_DEFS.length; ++i) {
+    let x = Math.round(Math.random() * 9) ;
+    let def = LEIST_DEFS[i];
+
+    if(x && (x % 2)){
+      const cls : string = STATI[Math.round(Math.random() * (STATI.length - 1))];
+      stati.push({titel:`${def}`, icon:`filter_${x}`, class: cls});
+      classes.add(cls);
+    }
+  }
+
+  let text:string;
+
+    if(classes.has('stWorking'))
+      text = 'In Arbeit';
+    else if(classes.has('stReceived'))
+      text = 'Rückmeldung';
+    else if(classes.has('stSent'))
+      text = 'Gesendet';
+    else if(classes.has('stApproved'))
+      text = 'Abgeschlossen';
+    else
+      text = 'Neu'
+
+  return { stati: stati, text: text };
+}
+
+function erstelleAnlagen(): Anlage[] {
+  let anlagen:Anlage[]  = [];
+  const anzahl = Math.round(Math.random() * (GEB_TEILE.length));
+  
+  for(let i = 0; i < anzahl; i++){
+    const teil: string = GEB_TEILE[i];
+    const nutzung: string = GEB_NUTZUNGEN[Math.round(Math.random() * (GEB_NUTZUNGEN.length - 1))];
+    const zaehlerNr: number = Math.round(Math.random() * 1000000) + 2222;
+    const zaehlerNr2: number = (i % 4 === 0) ? Math.round(Math.random() * 1000000) + 3333 : null;
+    const vnbMeldungsNr: number = (i % 3 === 0) ? Math.round(Math.random() * 1000000) + 4444 : 0;
+    
+    anlagen.push({
+      gebaeudeteil: teil,
+      gebaeudenutzung: nutzung,
+      zaehlerNr:zaehlerNr.toString(),
+      zaehlerNr2: zaehlerNr2 ? zaehlerNr2.toString() : '',
+      vnbMeldungsNr: vnbMeldungsNr ? vnbMeldungsNr.toString() : '',
+    });
+  }
+
+  return anlagen;
 }

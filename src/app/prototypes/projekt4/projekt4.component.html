@@ -23,7 +23,7 @@
             [ngStyle]="contentDrawerStyles" (resizing)="onResizseContentDrawer($event)"
             (resizeEnd)="onResizseContentDrawer($event)">
             <mat-selection-list [multiple]=" false"
-              style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;">
+              style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;"style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;">
               <mat-list-option *ngFor="let p of gefilterteProjekte" style="overflow-y: unset;"
                 (click)="aktuellesProjekt = p; editProjekt=false" [ngClass]="{'itmSelect' : aktuellesProjekt===p}">
                 {{p.titel}}
@@ -159,45 +159,34 @@
                   </mat-toolbar>
                </div>
                 </mat-expansion-panel>
-
-                <!-- <mat-expansion-panel id="Anlagen" [expanded]="true">
+              </mat-accordion>
+             <!-- <mat-card class="mat-elevation-z8"> -->
+                <mat-expansion-panel id="Anlagen" [expanded]="true"  class="mat-elevation-z8" style="margin-top: 2rem;">
                   <mat-expansion-panel-header>Anlagen</mat-expansion-panel-header>
-                  <mat-toolbar>
-                    <mat-toolbar-row>
-                      <mat-menu></mat-menu>
-                      <span>Liste der Anlagen</span>
-                      <span class="menu-spacer"></span>
-                      <b>
-                        <button mat-mini-fab color="primary" style="margin-left: 10px;">
+                  <mat-selection-list [multiple]=" false"
+                  style="padding-top: 0; padding-bottom: 0; min-width:12rem ; max-width: 16rem; "
+                  >
+                    <mat-list-option *ngFor="let a of aktuellesProjekt.anlagen">
+                      <div>{{a.gebaeudeteil}}, {{a.gebaeudenutzung}}</div>
+                      <!-- <div>{{a.zaehlerNr}}, {{a.stromkunde.name}}</div> -->
+                     </mat-list-option>
+                     <mat-list-option>
+                      <div>
+                        <button mat-mini-fab color="primary">
                           <mat-icon>add</mat-icon>
                         </button>
-                        <button mat-mini-fab color="primary" style="margin-left: 10px;">
-                          <mat-icon>content_copy</mat-icon>
-                        </button>
-                        <button mat-mini-fab color="primary" style="margin-left: 10px;">
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                        <button mat-mini-fab color="primary" style="margin-left: 10px;"
-                          (click)="allExpanded = !allExpanded;">
-                          <mat-icon *ngIf="true===allExpanded">expand_less</mat-icon>
-                          <mat-icon *ngIf="false===allExpanded">expand_more</mat-icon>
-                        </button>
-                      </b>
-                    </mat-toolbar-row>
-                  </mat-toolbar>
-                  <mat-accordion [multi]="true">
-                  </mat-accordion>
-                </mat-expansion-panel> -->
-
-              </mat-accordion>
+                      </div>
+                    </mat-list-option>
+                       </mat-selection-list>
+                  <!-- <mat-accordion [multi]="true">       
+                    <mat-expansion-panel *ngFor="let a of aktuellesProjekt.anlagen" [expanded]="false">
+                      <mat-expansion-panel-header>{{a.gebaeudeteil}}</mat-expansion-panel-header>
+                    </mat-expansion-panel>
+                  </mat-accordion> -->
+                </mat-expansion-panel>
+             <!-- </mat-card> -->
             </mat-card>
-            <!-- <div *ngIf="true">
-              <mat-drawer-container style="height: 200px; width: 200px;">
-                <mat-drawer-content>
-                </mat-drawer-content>
-              </mat-drawer-container>
-            </div> -->
-          </mat-drawer-content>
+         </mat-drawer-content>
 
         </mat-drawer-container>
       </mat-card-content>
