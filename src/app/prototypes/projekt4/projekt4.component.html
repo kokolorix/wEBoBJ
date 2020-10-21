@@ -1,41 +1,123 @@
-<mat-toolbar-row>
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Projekte</span>
-  <button mat-icon-button routerLink="/projektliste4//{{filter}}">
-    <mat-icon>arrow_circle_up</mat-icon>
-  </button>
-  <span>Projekt-Liste</span>
-  <span class="menu-spacer"></span>
-</mat-toolbar-row>
-<mat-drawer-container style="height: 100%;">
-  <mat-drawer mwlResizable #sidenav role="directory" mode="side" position="start" [opened]="navOpen" fixedTopGap="0"
-    fixedBottomGap="0" styles="box-sizing: border-box;" [enableGhostResize]="false"
-    [resizeEdges]="{ bottom: false, right: true, top: false, left: false }" [ngStyle]="contentDrawerStyles"
-    (resizing)="onResizseContentDrawer($event)" (resizeEnd)="onResizseContentDrawer($event)">
-    <mat-selection-list [multiple]=" false" style="padding-top: 0; padding-bottom: 0; min-width: 264px;">
-      <mat-list-option *ngFor="let p of gefilterteProjekte">
-        {{p.titel}}
-      </mat-list-option>
-      <mat-divider></mat-divider>
-      <mat-list-option>
-        <div>
-          <button mat-mini-fab color="primary">
-            <mat-icon>add</mat-icon>
+﻿<div class="alles">
+  <div class="theme rand-innen">
+    <mat-card class="mat-elevation-z8">
+      <mat-card-header>
+        <mat-card-title>Projekte</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-toolbar-row>
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
           </button>
-        </div>
-      </mat-list-option>
-    </mat-selection-list>
-  </mat-drawer>
+          <span>Projekte</span>
+          <button mat-icon-button routerLink="/projektliste4//{{filter}}">
+            <mat-icon>arrow_circle_up</mat-icon>
+          </button>
+          <span>Projekt-Liste</span>
+          <span class="menu-spacer"></span>
+        </mat-toolbar-row>
+        <mat-drawer-container style="height: 100%;">
+          <mat-drawer mwlResizable #sidenav role="directory" mode="side" position="start" [opened]="navOpen"
+            fixedTopGap="0" fixedBottomGap="0" style="box-sizing: border-box; overflow-y: unset;" [enableGhostResize]="false"
+            [resizeEdges]="{ bottom: false, right: true, top: false, left: false }" [ngStyle]="contentDrawerStyles"
+            (resizing)="onResizseContentDrawer($event)" (resizeEnd)="onResizseContentDrawer($event)">
+            <mat-selection-list [multiple]=" false" style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;">
+              <mat-list-option *ngFor="let p of gefilterteProjekte" style="overflow-y: unset;"
+              (click)="aktuellesProjekt = p"
+              [ngClass]="{'itmSelect' : aktuellesProjekt===p}">
+                {{p.titel}}
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option>
+                <div>
+                  <button mat-mini-fab color="primary">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </mat-list-option>
+            </mat-selection-list>
+          </mat-drawer>
 
-  <mat-drawer-content [ngStyle]="contentDrawerContentStyles">
-    <div *ngIf="true" style="height: 2222px;">
-      <mat-drawer-container style="height: 100%;">
-        <mat-drawer-content>
-        </mat-drawer-content>
-      </mat-drawer-container>
-    </div>
-  </mat-drawer-content>
+          <mat-drawer-content [ngStyle]="contentDrawerContentStyles">
+            <mat-card class="mat-elevation-z8">
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel id="ProjektDaten" [expanded]="true">
+          <mat-expansion-panel-header>
+            <!-- <button mat-mini-fab #sidenav_toggler color="primary" style="margin-right: 10px;">
+              <mat-icon *ngIf="true===sidenav.opened" (click)="sidenav.toggle()">chevron_left</mat-icon>
+              <mat-icon *ngIf="false===sidenav.opened" (click)="sidenav.toggle()">chevron_right</mat-icon>
+            </button> -->
+            Projekt-Daten
+          </mat-expansion-panel-header>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 300px; height: fit-content;">
+                            <mat-label>Standort</mat-label>
+                            <textarea matInput value="{{aktuellesProjekt.standort.strasse}}
+{{aktuellesProjekt.standort.plz}} {{aktuellesProjekt.standort.postOrt}}"></textarea>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 300px; ">
+                            <mat-label>Gemeinde</mat-label>
+                            <input matInput type="text" value="{{aktuellesProjekt.standort.gemeinde}}" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" style="width: 100px; margin-left: 2px; ">
+                            <mat-label>Parzelle</mat-label>
+                            <input matInput type="text" value="{{aktuellesProjekt.parzellenNr}}" />
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 300px; ">
+                            <mat-label>Versicherungs-Nr.</mat-label>
+                            <input matInput type="text" value="{{aktuellesProjekt.versicherungsNr}}" />
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 300px; ">
+                            <mat-label>Gebäudeart</mat-label>
+                            <input matInput type="text" value="{{aktuellesProjekt.gebaeudeArt}}" />
+                        </mat-form-field>
+                    </p>
+                </mat-expansion-panel>
+      <mat-expansion-panel id="Anlagen" [expanded]="true">
+        <mat-expansion-panel-header>Anlagen</mat-expansion-panel-header>
+        <mat-toolbar>
+          <mat-toolbar-row >
+            <mat-menu></mat-menu>
+            <span>Liste der Anlagen</span>
+            <span class="menu-spacer"></span>
+            <b>
+            <button mat-mini-fab color="primary" style="margin-left: 10px;">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" style="margin-left: 10px;">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" style="margin-left: 10px;">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" style="margin-left: 10px;" (click)="allExpanded = !allExpanded;">
+              <mat-icon *ngIf="true===allExpanded">expand_less</mat-icon>
+              <mat-icon *ngIf="false===allExpanded">expand_more</mat-icon>
+            </button>
+          </b>
+          </mat-toolbar-row>
+        </mat-toolbar><mat-accordion [multi]="true">
+      </mat-accordion>
+        </mat-expansion-panel>
 
-</mat-drawer-container>
+        </mat-accordion>              
+            </mat-card>
+            <!-- <div *ngIf="true">
+              <mat-drawer-container style="height: 200px; width: 200px;">
+                <mat-drawer-content>
+                </mat-drawer-content>
+              </mat-drawer-container>
+            </div> -->
+          </mat-drawer-content>
+
+        </mat-drawer-container>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

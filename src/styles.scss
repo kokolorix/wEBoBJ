@@ -3,7 +3,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-$bgColor: lightblue;
+$bgColor: rgb(247, 236, 215);
 $edge : 0.8rem;
 
 $bgHovered : lightblue;
@@ -22,4 +22,28 @@ $bgSelected : lightblue;
 }
 .stApproved {
   background-color: lightgreen;
+}
+
+.itmSelect{
+  background-color:$bgSelected;
+}
+
+
+.theme{
+  background-color: $bgColor;
+}
+
+.rand-aussen {
+  margin: $edge;
+  // border: 2px solid red;
+}
+
+.rand-innen {
+  padding: $edge;
+  // border: 2px solid red;
+}
+
+.alles {
+  width: 100%;
+  height: 100%;
 }

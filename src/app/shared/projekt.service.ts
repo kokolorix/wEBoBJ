@@ -45,6 +45,9 @@ const ORTE: string[] = [
 const AUFTRAG_DEFS: string[] = [
   'Neubau', 'Umbau', 'period. Kontrolle', 'temp. Anlage'
 ];
+const GEB_ARTEN: string[] = [
+  'EFH', 'MFH', 'Gewerbe', 'Blockhütte', 'Trump Tower'
+];
 const LEIST_DEFS: string[] = [
   'TAG', 'IA', 'AB', 'SiNa','MPP','Schema','Beilage',
 ];
@@ -56,9 +59,18 @@ function erstelleProjekt(id: number) : Projekt
 {
   const strasse : string  = STRASSEN[Math.round(Math.random() * (STRASSEN.length - 1))];
   const ort: string = ORTE[Math.round(Math.random() * (ORTE.length - 1))];
+  const plz: number = parseInt(ort.substr(0,4));  
   const nr : string = Math.round(Math.random() * (STRASSEN.length - 1) + 1).toString();
   const vnb : string = VNBs[Math.round(Math.random() * (VNBs.length - 1))];
   const art : string = AUFTRAG_DEFS[Math.round(Math.random() * (AUFTRAG_DEFS.length - 1))];
+
+  const tag:number = Math.round(Math.random() * 30) + 1;
+  const monat:number = Math.round(Math.random() * 12) + 1;
+  const jahr:number = Math.round(Math.random() * 10) + 2015;
+
+  const parzellenNr:number = Math.round(Math.random() * 1000) + 101;
+  const versicherungsNr:number = Math.round(Math.random() * 1000000) + 5478;
+  const gebaeudeArt:string = GEB_ARTEN[Math.round(Math.random() * (GEB_ARTEN.length - 1))];
 
   var status : Status[] = [];
   var classes = new Set();
@@ -90,6 +102,17 @@ function erstelleProjekt(id: number) : Projekt
   return {
     id: id,
     titel: strasse + ' ' + nr + ', ' + ort,
+    standort: {
+      strasse:strasse,
+      strasseNr:parseFloat(nr),
+      plz:plz,
+      postOrt:ort.substr(5).trim(),
+      gemeinde:plz > 6000 ? 'Küste':'',
+    },
+    inbetriebnahme:{tag:tag,monat:monat,jahr:jahr},
+    parzellenNr:parzellenNr,
+    versicherungsNr:versicherungsNr,
+    gebaeudeArt:gebaeudeArt,
     vnb: vnb,
     art: art,
     statusText: statusText,

@@ -18,7 +18,7 @@ const routes: Routes = [
 		redirectTo: 'projektliste4',
 		pathMatch: 'full'
 	},
-  {
+	{
 		path: 'formular1',
 		component: Formular1Component
 	},
@@ -36,9 +36,9 @@ const routes: Routes = [
 	},
 	{
 		path: 'projektliste1',
-    component: Projektliste1Component
-  },
-  {
+		component: Projektliste1Component
+	},
+	{
 		path: 'anlage4',
 		component: Anlage4Component
 	},
@@ -51,14 +51,18 @@ const routes: Routes = [
 		component: Projekt4Component
 	},
 	{
-		path: 'projektliste4',
-    component: Projektliste4Component
-  },
+		path: 'projekt4/:id',
+		component: Projekt4Component
+	},
 	{
 		path: 'projektliste4/:filter',
-    component: Projektliste4Component
-  },
-  {
+		component: Projektliste4Component
+	},
+	{
+		path: 'projektliste4',
+		component: Projektliste4Component
+	},
+	{
 		path: '**',
 		redirectTo: "projektliste4"
 	}

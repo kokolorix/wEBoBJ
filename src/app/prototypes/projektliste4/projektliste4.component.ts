@@ -1,11 +1,12 @@
-import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable, of } from "rxjs";
-import {Status, Projekt} from 'src/app/shared/projekt.interface'
-import {ProjektService} from 'src/app/shared/projekt.service'
+import { Status, Projekt } from 'src/app/shared/projekt.interface'
+import { ProjektService } from 'src/app/shared/projekt.service'
 import { ActivatedRoute } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projektliste4',
@@ -13,7 +14,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./projektliste4.component.scss']
 })
 export class Projektliste4Component implements OnInit {
-  displayedColumns: string[] = ['details','titel', 'art', 'vnb', 'status'];
+  displayedColumns: string[] = ['details', 'titel', 'art', 'vnb', 'status'];
   dataSource: MatTableDataSource<Projekt>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,20 +24,22 @@ export class Projektliste4Component implements OnInit {
   public projekte$: Observable<Projekt[]>;
 
   public projektIds: number[];
-  public expandedElement:Projekt | null;
+  public expandedElement: Projekt | null;
 
   constructor(
+    private router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly projektService: ProjektService,
   ) {
-      // Assign the data to the data source for the table to render
-      this.activatedRoute.params.subscribe((params) => {
-        this.filter = params.filter.trim().toLowerCase();
-      });
-      this.dataSource = new MatTableDataSource(this.projektService.getAllProjekte());
-      this.dataSource.filter = this.filter;
-      this.projektIds = this.dataSource.filteredData.map(x => x.id);
- }
+    // Assign the data to the data source for the table to render
+    this.activatedRoute.params.subscribe((params) => {
+      if(params.filter)
+        this.filter = (params.filter as string).trim().toLowerCase();
+    });
+    this.dataSource = new MatTableDataSource(this.projektService.getAllProjekte());
+    this.dataSource.filter = this.filter;
+    this.projektIds = this.dataSource.filteredData.map(x => x.id);
+  }
 
 
   ngOnInit(): void {
@@ -59,8 +62,16 @@ export class Projektliste4Component implements OnInit {
     }
   }
 
-  openProjektDetail(row:Projekt) : void {
-    this.expandedElement = this.expandedElement === row ? null : row
-  }
+  openProjektDetail(row: Projekt): void {
+    let url:string = `/projekt4/${row.id}`;
+    if (this.filter) 
+      url += `/${this.filter}/${this.projektIds}`;
+    
+      this.router.navigateByUrl(url).then(nav => {
+        console.log(nav); // true if navigation is successful
+      }, err => {
+        console.log(err) // when there's an error
+      });
+    }
 
 }
