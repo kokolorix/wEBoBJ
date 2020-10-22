@@ -2,7 +2,7 @@
   <div class="theme rand-innen">
     <mat-card class="mat-elevation-z8">
       <mat-card-header>
-        <mat-card-title>Projekte</mat-card-title>
+        <mat-card-title>Projekt-Details</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <mat-toolbar-row>
@@ -17,13 +17,14 @@
           <span class="menu-spacer"></span>
         </mat-toolbar-row>
         <mat-drawer-container style="height: 100%;">
-          <mat-drawer mwlResizable #sidenav role="directory" mode="side" position="start" [opened]="navOpen && das_ganze.offsetWidth > 1000"
-            fixedTopGap="0" fixedBottomGap="0" style="box-sizing: border-box; overflow-y: unset;"
-            [enableGhostResize]="false" [resizeEdges]="{ bottom: false, right: true, top: false, left: false }"
-            [ngStyle]="contentDrawerStyles" (resizing)="onResizseContentDrawer($event)"
-            (resizeEnd)="onResizseContentDrawer($event)">
-            <mat-selection-list [multiple]=" false"
-              style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;"style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;">
+          <mat-drawer mwlResizable #sidenav role="directory" mode="side" position="start"
+            [opened]="navOpen && das_ganze.offsetWidth > 1000" fixedTopGap="0" fixedBottomGap="0"
+            style="box-sizing: border-box; overflow-y: unset;" [enableGhostResize]="false"
+            [resizeEdges]="{ bottom: false, right: true, top: false, left: false }" [ngStyle]="contentDrawerStyles"
+            (resizing)="onResizseContentDrawer($event)" (resizeEnd)="onResizseContentDrawer($event)">
+            <mat-selection-list [multiple]="false"
+              style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;"
+              style="padding-top: 0; padding-bottom: 0; min-width: 264px; overflow-y: unset;">
               <mat-list-option *ngFor="let p of gefilterteProjekte" style="overflow-y: unset;"
                 (click)="aktuellesProjekt = p; editProjekt=false" [ngClass]="{'itmSelect' : aktuellesProjekt===p}">
                 {{p.titel}}
@@ -38,155 +39,14 @@
               </mat-list-option>
             </mat-selection-list>
           </mat-drawer>
-
           <mat-drawer-content [ngStyle]="contentDrawerContentStyles">
-            <mat-card class="mat-elevation-z8">
+            <div class="content rand-innen">
               <mat-accordion [multi]="true">
-                <mat-expansion-panel #projekt_daten [expanded]="true">
-                  <mat-expansion-panel-header>
-                    <span>Projekt-Daten</span>
-                    <!-- <span class="menu-spacer"></span> -->
-                    <span *ngIf="!projekt_daten.expanded" style="margin-left: 0.5rem;">{{aktuellesProjekt.standort.strasse}} {{aktuellesProjekt.standort.plz}} {{aktuellesProjekt.standort.postOrt}}</span>
-                  </mat-expansion-panel-header>
-                  <div *ngIf="!editProjekt">
-                  <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; height: fit-content;"
-                    >
-                      <mat-label>Standort</mat-label>
-                      <textarea disabled="true" matInput value="{{aktuellesProjekt.standort.strasse}}
-{{aktuellesProjekt.standort.plz}} {{aktuellesProjekt.standort.postOrt}}"
-                      ></textarea>
-                    </mat-form-field>
-                    <button mat-icon-button class="editButton" 
-                    (click)="editStandort(this)"
-                    >
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                  </p>
-                    <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Gemeinde</mat-label>
-                      <input disabled="true" matInput type="text" value="{{aktuellesProjekt.standort.gemeinde}}" />
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 6rem; margin-left: 0.5rem; ">
-                      <mat-label>Parzelle</mat-label>
-                      <input disabled="true" matInput type="text" value="{{aktuellesProjekt.parzellenNr}}" />
-                    </mat-form-field>
-                    <button mat-icon-button class="editButton" 
-                    (click)="editStandort(this)"
-                    >
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                  </p>
-                  <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Versicherungs-Nr.</mat-label>
-                      <input disabled="true" matInput type="text" value="{{aktuellesProjekt.versicherungsNr}}" />
-                    </mat-form-field>
-                    <button mat-icon-button class="editButton" 
-                    (click)="editStandort(this)"
-                    >
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                  </p>
-                  <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Gebäudeart</mat-label>
-                      <input disabled="true" matInput type="text" value="{{aktuellesProjekt.gebaeudeArt}}" />
-                    </mat-form-field>
-                    <button mat-icon-button class="editButton" 
-                    (click)="editStandort(this)"
-                    >
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                  </p>
-               </div>
-                 <div *ngIf="editProjekt">
-                  <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Strasse</mat-label>
-                      <input matInput type="text" value="{{aktuellesProjekt.standort.strasse}}" />
-                    </mat-form-field>                    
-                    <mat-form-field appearance="outline" style="width: 6rem; margin-left: 0.5rem; ">
-                      <mat-label>Nr</mat-label>
-                      <input matInput type="text" value="{{aktuellesProjekt.standort.strasseNr}}" />
-                    </mat-form-field>
-                   <mat-form-field appearance="outline" style="width: 6rem; margin-left: 0.5rem; ">
-                      <mat-label>Nr-Zusatz</mat-label>
-                      <input matInput type="text" value="{{aktuellesProjekt.standort.strasseNrZusatz}}" />
-                    </mat-form-field>
-                   </p>
-                   <p>
-                    <mat-form-field appearance="outline" style="width: 6rem; margin-right: 0.5rem; ">
-                      <mat-label>PLZ</mat-label>
-                      <input  matInput type="text" value="{{aktuellesProjekt.standort.plz}}" />
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Ort</mat-label>
-                      <input matInput type="text" value="{{aktuellesProjekt.standort.postOrt}}" />
-                    </mat-form-field>
-                  </p>
-                   <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Gemeinde</mat-label>
-                      <input matInput type="text" value="{{aktuellesProjekt.standort.gemeinde}}" />
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 6rem; margin-left: 0.5rem; ">
-                      <mat-label>Parzelle</mat-label>
-                      <input  matInput type="text" value="{{aktuellesProjekt.parzellenNr}}" />
-                    </mat-form-field>
-                  </p>
-                  <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Versicherungs-Nr.</mat-label>
-                      <input matInput type="text" value="{{aktuellesProjekt.versicherungsNr}}" />
-                    </mat-form-field>
-                  </p>
-                  <p>
-                    <mat-form-field appearance="outline" style="width: 18rem; ">
-                      <mat-label>Gebäudeart</mat-label>
-                      <input  matInput type="text" value="{{aktuellesProjekt.gebaeudeArt}}" />
-                    </mat-form-field>
-                  </p>
-                   <mat-toolbar>
-                    <span class="menu-spacer"></span>
-                    <button mat-icon-button (click)="editProjekt=false">
-                      <mat-icon>save</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="editProjekt=false">
-                      <mat-icon>cancel</mat-icon>
-                    </button>
-                  </mat-toolbar>
-               </div>
-                </mat-expansion-panel>
+                <projekt-daten [aktuellesProjekt]="aktuellesProjekt"></projekt-daten>
+                <projekt-anlage-daten [aktuellesProjekt]="aktuellesProjekt"></projekt-anlage-daten>
               </mat-accordion>
-             <!-- <mat-card class="mat-elevation-z8"> -->
-                <mat-expansion-panel id="Anlagen" [expanded]="true"  class="mat-elevation-z8" style="margin-top: 2rem;">
-                  <mat-expansion-panel-header>Anlagen</mat-expansion-panel-header>
-                  <mat-selection-list [multiple]=" false"
-                  style="padding-top: 0; padding-bottom: 0; min-width:12rem ; max-width: 16rem; "
-                  >
-                    <mat-list-option *ngFor="let a of aktuellesProjekt.anlagen">
-                      <div>{{a.gebaeudeteil}}, {{a.gebaeudenutzung}}</div>
-                      <!-- <div>{{a.zaehlerNr}}, {{a.stromkunde.name}}</div> -->
-                     </mat-list-option>
-                     <mat-list-option>
-                      <div>
-                        <button mat-mini-fab color="primary">
-                          <mat-icon>add</mat-icon>
-                        </button>
-                      </div>
-                    </mat-list-option>
-                       </mat-selection-list>
-                  <!-- <mat-accordion [multi]="true">       
-                    <mat-expansion-panel *ngFor="let a of aktuellesProjekt.anlagen" [expanded]="false">
-                      <mat-expansion-panel-header>{{a.gebaeudeteil}}</mat-expansion-panel-header>
-                    </mat-expansion-panel>
-                  </mat-accordion> -->
-                </mat-expansion-panel>
-             <!-- </mat-card> -->
-            </mat-card>
-         </mat-drawer-content>
+            </div>
+          </mat-drawer-content>
 
         </mat-drawer-container>
       </mat-card-content>

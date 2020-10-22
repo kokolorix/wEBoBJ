@@ -3,12 +3,16 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-$bgColor: rgb(247, 236, 215);
-$edge : 0.8rem;
+$bgColor: white;
+$fgColor: black;
+
+$bgThemeColor: rgb(247, 236, 215);
+$fgThemeColor:  rgb(100, 100, 100);
 
 $bgHovered : lightblue;
 $bgSelected : lightblue;
 
+$edge : 0.8rem;
 // $stWorking : blue
 
 .stWorking{
@@ -30,7 +34,13 @@ $bgSelected : lightblue;
 
 
 .theme{
-  background-color: $bgColor;
+  color: $fgThemeColor;
+  background-color: $bgThemeColor;
+}
+
+.content{
+  // color: $fgColor;
+  background-color : $bgColor !important;
 }
 
 .rand-aussen {
@@ -53,4 +63,8 @@ $bgSelected : lightblue;
 }
 .editButton:hover{
   opacity: 100%;
+}
+
+.menu-spacer {
+	flex: 1 1 auto;
 }

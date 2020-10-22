@@ -26,8 +26,6 @@ export class Projekt4Component implements OnInit {
   public gefilterteProjekte : Projekt[];
   public aktuellesProjekt : Projekt;
 
-  public editProjekt: boolean = false; 
-
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly projektService: ProjektService,
@@ -46,11 +44,6 @@ export class Projekt4Component implements OnInit {
         this.gefilterteProjekte = this.projektService.getAllProjekte()
       }
     });
-  }
- 
-  editStandort(e:any):void{
-    this.editProjekt = true;
-		// this.dialog.open(StandortDialogComponent);
   }
 
   onResizseContentDrawer(event: ResizeEvent): void {

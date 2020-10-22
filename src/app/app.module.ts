@@ -54,6 +54,8 @@ import { Projekt4Component } from './prototypes/projekt4/projekt4.component';
 import { Projektliste4Component } from './prototypes/projektliste4/projektliste4.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProjektDatenComponent } from './prototypes/projekt4/projekt-daten/projekt-daten.component';
+import { AnlageDatenComponent } from './prototypes/projekt4/anlage-daten/anlage-daten.component';
 
 
 @NgModule({
@@ -71,7 +73,9 @@ import { FooterComponent } from './footer/footer.component';
     Projekt4Component,
     Projektliste4Component,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProjektDatenComponent,
+    AnlageDatenComponent
   ],
   imports: [
     BrowserModule,
