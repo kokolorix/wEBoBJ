@@ -3,13 +3,16 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-$bgColor: lightblue;
+$bgColor: white;
+$fgColor: black;
+
+$bgThemeColor: rgb(247, 236, 215);
+$fgThemeColor:  rgb(100, 100, 100);
+
+$bgHovered : lightblue;
+$bgSelected : lightblue;
+
 $edge : 0.8rem;
-
-$bgHoovered : lightblue;
-$bgSelected : darkblue;
-$fgSelected : lightblue;
-
 // $stWorking : blue
 
 .stWorking{
@@ -23,4 +26,45 @@ $fgSelected : lightblue;
 }
 .stApproved {
   background-color: lightgreen;
+}
+
+.itmSelect{
+  background-color:$bgSelected;
+}
+
+
+.theme{
+  color: $fgThemeColor;
+  background-color: $bgThemeColor;
+}
+
+.content{
+  // color: $fgColor;
+  background-color : $bgColor !important;
+}
+
+.rand-aussen {
+  margin: $edge;
+  // border: 2px solid red;
+}
+
+.rand-innen {
+  padding: $edge;
+  // border: 2px solid red;
+}
+
+.alles {
+  width: 100%;
+  height: 100%;
+}
+
+.editButton{
+  opacity: 25%;
+}
+.editButton:hover{
+  opacity: 100%;
+}
+
+.menu-spacer {
+	flex: 1 1 auto;
 }
