@@ -39,43 +39,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { Projekt2Component } from './prototypes/projekt2/projekt2.component';
-import { Projekt1Component } from './prototypes/projekt1/projekt1.component';
-import { ProjektDialogComponent } from './prototypes/projekt2/projekt-dialog/projekt-dialog.component';
-import { AnlageDialogComponent } from './prototypes/projekt2/anlage-dialog/anlage-dialog.component';
-import { Projektliste1Component } from './prototypes/projektliste1/projektliste1.component';
-import { Formular1Component } from './prototypes/formular1/formular1.component';
 
-import { ResizableModule } from 'angular-resizable-element';
-import { Projekt3Component } from './prototypes/projekt3/projekt3.component';
-import { Anlage4Component } from './prototypes/anlage4/anlage4.component';
-import { Formular4Component } from './prototypes/formular4/formular4.component';
-import { Projekt4Component } from './prototypes/projekt4/projekt4.component';
-import { Projektliste4Component } from './prototypes/projektliste4/projektliste4.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ProjektDatenComponent } from './prototypes/projekt4/projekt-daten/projekt-daten.component';
-import { AnlageDatenComponent } from './prototypes/projekt4/anlage-daten/anlage-daten.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    Projekt2Component,
-    Projekt1Component,
-    ProjektDialogComponent,
-    AnlageDialogComponent,
-    Formular1Component,
-    Projektliste1Component,
-    Projekt3Component,
-    Anlage4Component,
-    Formular4Component,
-    Projekt4Component,
-    Projektliste4Component,
     HeaderComponent,
     FooterComponent,
-    ProjektDatenComponent,
-    AnlageDatenComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +88,6 @@ import { AnlageDatenComponent } from './prototypes/projekt4/anlage-daten/anlage-
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    ResizableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
