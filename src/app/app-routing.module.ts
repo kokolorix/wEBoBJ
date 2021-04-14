@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ObjTreeComponent } from './obj-tree/obj-tree.component';
 
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'index',
+		redirectTo: 'obj-tree',
 		pathMatch: 'full'
+	},
+	{
+		path: 'obj-tree',
+		component: ObjTreeComponent
 	},
 ];
 

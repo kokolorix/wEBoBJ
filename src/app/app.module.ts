@@ -42,12 +42,14 @@ import { MatTreeModule } from '@angular/material/tree';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ObjTreeComponent } from './obj-tree/obj-tree.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ObjTreeComponent,
   ],
   imports: [
     BrowserModule,
