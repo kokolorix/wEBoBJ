@@ -4,9 +4,15 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { SelectionModel } from '@angular/cdk/collections';
 import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
 
+export class Property
+{
+  name: string;
+  value: string;
+}
 export class ObjNode {
   children?: ObjNode[];
   name: string;
+  properties?: Property[];
 }
 
 export class FlatNode {
@@ -17,7 +23,10 @@ export class FlatNode {
 
 const TREE_DATA: ObjNode[] = [
   {
-    name: 'Objs',
+    name: 'Objects',
+    properties: [
+      {name:'Type', value:'RootObject'}
+    ],
     children: [
       {
         name: 'Fruit',
@@ -145,9 +154,17 @@ export class ObjTreeComponent implements OnInit {
   nameSelectionToggle(node: FlatNode): void {
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
-    this.checklistSelection.isSelected(node)
-      ? this.checklistSelection.select(...descendants)
-      : this.checklistSelection.deselect(...descendants);
+    // this.checklistSelection.isSelected(node)
+    //   ? this.checklistSelection.select(...descendants)
+    //   : this.checklistSelection.deselect(...descendants);
+    if(this.checklistSelection.isSelected(node))
+    {
+      const nestedNode = this.flatNodeMap.get(node);
+      this.dataSourceProperties = nestedNode.properties;
+    }
+    else
+      this.dataSourceProperties = []
+    
   }
 
   /** Select the category so we can insert the new name. */
@@ -193,4 +210,6 @@ export class ObjTreeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  displayedColumns: string[] = ['name', 'value'];
+  dataSourceProperties = []
 }

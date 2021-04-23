@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    //  padding: 10px;
+}
+
+.flex-item-left {
+    //  padding: 10px;
+    //  margin: 10px;
+    //  margin-right: 10px;
+    flex: 50%;
+}
+
+.flex-item-right {
+    //  padding: 10px;
+    //  margin: 10px;
+    //  margin-left: 10px;
+    flex: 50%;
+}
+
+@media (max-width: 400px) {
+    .flex-item-right,
+    .flex-item-left {
+        flex: 100%;
+    }
+}

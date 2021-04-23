@@ -1,70 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 $bgColor: white;
 $fgColor: black;
-
 $bgThemeColor: rgb(247, 236, 215);
-$fgThemeColor:  rgb(100, 100, 100);
-
-$bgHovered : lightblue;
-$bgSelected : lightblue;
-
-$edge : 0.8rem;
+$fgThemeColor: rgb(100, 100, 100);
+$bgHovered: lightblue;
+$bgSelected: lightblue;
+$edge: 0.8rem;
 // $stWorking : blue
+.stWorking {
+    background-color: lightgray;
+}
 
-.stWorking{
-  background-color: lightgray;
+.stSent {
+    background-color: lightsalmon;
 }
-.stSent{
-  background-color: lightsalmon;
+
+.stReceived {
+    background-color: lightpink;
 }
-.stReceived{
-  background-color: lightpink;
-}
+
 .stApproved {
-  background-color: lightgreen;
+    background-color: lightgreen;
 }
 
-.itmSelect{
-  background-color:$bgSelected;
+.itmSelect {
+    background-color: $bgSelected;
 }
 
-
-.theme{
-  color: $fgThemeColor;
-  background-color: $bgThemeColor;
+.theme {
+    color: $fgThemeColor;
+    background-color: $bgThemeColor;
 }
 
-.content{
-  // color: $fgColor;
-  background-color : $bgColor !important;
+.content {
+    // color: $fgColor;
+    background-color: $bgColor !important;
 }
 
 .rand-aussen {
-  margin: $edge;
-  // border: 2px solid red;
+    margin: $edge;
+    // border: 2px solid red;
 }
 
 .rand-innen {
-  padding: $edge;
-  // border: 2px solid red;
+    padding: $edge;
+    // border: 2px solid red;
 }
 
 .alles {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-.editButton{
-  opacity: 25%;
+.editButton {
+    opacity: 25%;
 }
-.editButton:hover{
-  opacity: 100%;
+
+.editButton:hover {
+    opacity: 100%;
 }
 
 .menu-spacer {
-	flex: 1 1 auto;
+    flex: 1 1 auto;
 }
