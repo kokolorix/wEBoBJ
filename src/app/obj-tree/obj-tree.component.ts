@@ -1,8 +1,8 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {SelectionModel} from '@angular/cdk/collections';
-import {of as ofObservable, Observable, BehaviorSubject} from 'rxjs';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { SelectionModel } from '@angular/cdk/collections';
+import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
 
 export class ObjNode {
   children?: ObjNode[];
@@ -17,70 +17,74 @@ export class FlatNode {
 
 const TREE_DATA: ObjNode[] = [
   {
-    name: 'Fruit',
-    children: [
-      {name: 'Apple'},
-      {name: 'Banana'},
-      {name: 'Fruit loops'},
-    ]
-  }, {
-    name: 'Vegetables',
+    name: 'Objs',
     children: [
       {
-        name: 'Green',
+        name: 'Fruit',
         children: [
-          {name: 'Broccoli'},
-          {name: 'Brussels sprouts'},
+          { name: 'Apple' },
+          { name: 'Banana' },
+          { name: 'Fruit loops' },
         ]
       }, {
-        name: 'Orange',
+        name: 'Vegetables',
         children: [
-          {name: 'Pumpkins'},
-          {name: 'Carrots'},
+          {
+            name: 'Green',
+            children: [
+              { name: 'Broccoli' },
+              { name: 'Brussels sprouts' },
+            ]
+          }, {
+            name: 'Orange',
+            children: [
+              { name: 'Pumpkins' },
+              { name: 'Carrots' },
+            ]
+          },
         ]
       },
     ]
-  },
-];
+  }];
 
 /**
  * Checklist database, it can build a tree structured Json object.
  * Each node in Json object represents a to-do name or a category.
  * If a node is a category, it has children names and new names can be added under the category.
  */
- @Injectable()
- export class ChecklistDatabase {
-   dataChange: BehaviorSubject<ObjNode[]> = new BehaviorSubject<ObjNode[]>([]);
- 
-   get data(): ObjNode[] { return this.dataChange.value; }
- 
-   constructor() {
-     this.initialize();
-   }
- 
-   initialize() {
-     // Build the tree nodes from Json object. The result is a list of `ObjNode` with nested
-     //     file node as children.
-     const data = TREE_DATA;
- 
-     // Notify the change.
-     this.dataChange.next(data);
-   }
+@Injectable()
+export class ChecklistDatabase {
+  dataChange: BehaviorSubject<ObjNode[]> = new BehaviorSubject<ObjNode[]>([]);
 
-   /** Add an name to to-do list */
-   insertName(parent: ObjNode, name: string) {
-     const child = <ObjNode>{name: name};
-     if (parent.children) {
-       parent.children.push(child);
-       this.dataChange.next(this.data);
-     }
-   }
- 
-   updateName(node: ObjNode, name: string) {
-     node.name = name;
-     this.dataChange.next(this.data);
-   }
- }
+  get data(): ObjNode[] { return this.dataChange.value; }
+
+  constructor() {
+    this.initialize();
+  }
+
+  initialize() {
+    // Build the tree nodes from Json object. The result is a list of `ObjNode` with nested
+    //     file node as children.
+    const data = TREE_DATA;
+
+    // Notify the change.
+    this.dataChange.next(data);
+  }
+
+  /** Add an name to to-do list */
+  insertName(parent: ObjNode, name: string) {
+    const child = <ObjNode>{ name: name };
+    if (parent.children) {
+      parent.children.push(child);
+      this.dataChange.next(this.data);
+    }
+  }
+
+  updateName(node: ObjNode, name: string) {
+    node.name = name;
+    this.dataChange.next(this.data);
+  }
+}
 @Component({
   selector: 'app-obj-tree',
   templateUrl: './obj-tree.component.html',
@@ -104,8 +108,8 @@ export class ObjTreeComponent implements OnInit {
   treeControl = new FlatTreeControl<FlatNode>(
     node => node.level, node => node.expandable);
 
-    treeFlattener = new MatTreeFlattener(
-      this._transformer, node => node.level, node => node.expandable, node => node.children);
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   /** The selection for checklist */
@@ -123,7 +127,7 @@ export class ObjTreeComponent implements OnInit {
 
   hasNoContent = (_: number, _nodeData: FlatNode) => { return _nodeData.name === ''; };
 
-  
+
   /** Whether all the descendants of the node are selected */
   descendantsAllSelected(node: FlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
@@ -156,12 +160,13 @@ export class ObjTreeComponent implements OnInit {
   /** Save the node to database */
   saveNode(node: FlatNode, nameValue: string) {
     const nestedNode = this.flatNodeMap.get(node);
+    nestedNode.children = [];
     this.database.updateName(nestedNode!, nameValue);
   }
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
    */
-   transformer = (node: ObjNode, level: number) => {
+  transformer = (node: ObjNode, level: number) => {
     let flatNode = this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node)!.name === node.name
       ? this.nestedNodeMap.get(node)!
       : new FlatNode();
@@ -170,18 +175,20 @@ export class ObjTreeComponent implements OnInit {
     flatNode.expandable = !!node.children;
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
+    if(level  === 0)
+      this.treeControl.expand(flatNode);
     return flatNode;
   }
 
-constructor(private database: ChecklistDatabase) {
-  this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
-  this.treeControl = new FlatTreeControl<FlatNode>(this.getLevel, this.isExpandable);
-  this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  constructor(private database: ChecklistDatabase) {
+    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
+    this.treeControl = new FlatTreeControl<FlatNode>(this.getLevel, this.isExpandable);
+    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  database.dataChange.subscribe(data => {
+    database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
-}
+  }
 
   ngOnInit(): void {
   }
