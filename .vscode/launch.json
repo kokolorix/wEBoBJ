@@ -8,7 +8,7 @@
         "name": "Launch Edge",
         "request": "launch",
         "type": "pwa-msedge",
-        "url": "http://localhost:4200/#/projektliste4",
+        "url": "http://localhost:4200",
         "webRoot": "${workspaceFolder}"
       }
     ]
