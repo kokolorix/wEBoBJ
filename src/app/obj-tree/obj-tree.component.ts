@@ -3,16 +3,12 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { SelectionModel } from '@angular/cdk/collections';
 import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
+import { Object, Property } from 'src/app/shared/object';
 
-export class Property
-{
-  name: string;
-  value: string;
-}
 export class ObjNode {
-  children?: ObjNode[];
   name: string;
-  properties?: Property[];
+  object: Object;
+  children?: ObjNode[];
 }
 
 export class FlatNode {
@@ -22,39 +18,40 @@ export class FlatNode {
 }
 
 const TREE_DATA: ObjNode[] = [
-  {
-    name: 'Objects',
-    properties: [
-      {name:'Type', value:'RootObject'}
-    ],
-    children: [
-      {
-        name: 'Fruit',
-        children: [
-          { name: 'Apple' },
-          { name: 'Banana' },
-          { name: 'Fruit loops' },
-        ]
-      }, {
-        name: 'Vegetables',
-        children: [
-          {
-            name: 'Green',
-            children: [
-              { name: 'Broccoli' },
-              { name: 'Brussels sprouts' },
-            ]
-          }, {
-            name: 'Orange',
-            children: [
-              { name: 'Pumpkins' },
-              { name: 'Carrots' },
-            ]
-          },
-        ]
-      },
-    ]
-  }];
+  // {
+  //   name: 'Objects',
+  //   properties: [
+  //     {name:'Type', value:'RootObject'}
+  //   ],
+  //   children: [
+  //     {
+  //       name: 'Fruit',
+  //       children: [
+  //         { name: 'Apple' },
+  //         { name: 'Banana' },
+  //         { name: 'Fruit loops' },
+  //       ]
+  //     }, {
+  //       name: 'Vegetables',
+  //       children: [
+  //         {
+  //           name: 'Green',
+  //           children: [
+  //             { name: 'Broccoli' },
+  //             { name: 'Brussels sprouts' },
+  //           ]
+  //         }, {
+  //           name: 'Orange',
+  //           children: [
+  //             { name: 'Pumpkins' },
+  //             { name: 'Carrots' },
+  //           ]
+  //         },
+  //       ]
+  //     },
+  //   ]
+  // }
+];
 
 /**
  * Checklist database, it can build a tree structured Json object.
@@ -160,7 +157,7 @@ export class ObjTreeComponent implements OnInit {
     if(this.checklistSelection.isSelected(node))
     {
       const nestedNode = this.flatNodeMap.get(node);
-      this.dataSourceProperties = nestedNode.properties;
+      // this.dataSourceProperties = nestedNode.properties;
     }
     else
       this.dataSourceProperties = []
