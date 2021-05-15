@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { ObjsHierarchyComponent } from './objs/objs-hierarchy/objs-hierarchy.component';
 
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'index',
+		redirectTo: 'hierarchy',
 		pathMatch: 'full'
+	},
+	{
+		path: 'hierarchy',
+		component: ObjsHierarchyComponent
 	},
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes, { useHash: true })],
-	exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
