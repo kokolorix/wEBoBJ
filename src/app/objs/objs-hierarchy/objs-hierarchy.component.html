@@ -1,1 +1,42 @@
-<p>objs-hierarchy works!</p>
+<mat-accordion>
+    <mat-expansion-panel [expanded]="true" showToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Objects in system
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-toolbar>
+            <button mat-icon-button (click)="onNew()">
+            <mat-icon>create_new_folder</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onRandom()">
+               <mat-icon>bolt</mat-icon>
+            </button>
+            <span>Object tree</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button>
+               <mat-icon>save</mat-icon>
+            </button>
+            <button mat-icon-button>
+               <mat-icon>download</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onClear()">
+            <mat-icon>clear</mat-icon>
+         </button>
+        </mat-toolbar>
+        <mat-selection-list [multiple]="false">
+            <mat-list-option *ngFor="let node of objTree">
+                <span>{{node.name}}</span>
+                <!-- <div>
+                    <mat-selection-list [multiple]="false">
+                        <mat-list-option *ngFor="let child of node.children">
+                            {{child.name}}
+                        </mat-list-option>
+                    </mat-selection-list>
+                </div> -->
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-expansion-panel>
+</mat-accordion>
