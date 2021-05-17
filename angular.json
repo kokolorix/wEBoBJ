@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "wEBoBJ"
+  "defaultProject": "wEBoBJ",
+  "cli": {
+    "analytics": false
+  }
 }
