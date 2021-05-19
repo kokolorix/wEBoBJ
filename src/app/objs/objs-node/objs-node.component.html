@@ -1,0 +1,3 @@
+<div *ngIf="node" style="padding-left: 1em" (click)="onClick(node)">{{node.name}}
+    <app-objs-node *ngFor="let n of node.children" [node]="n"></app-objs-node>
+</div>

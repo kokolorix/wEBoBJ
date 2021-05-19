@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Object, rootBaseT } from 'src/app/shared/object';
 import { ObjsService } from 'src/app/shared/objs.service';
+import { ObjsNodeComponent } from 'src/app/objs/objs-node/objs-node.component';
 
-interface ObjTreeNode{
+export interface ObjTreeNode{
   name:string;
   object:Object;
   children:ObjTreeNode[];
@@ -21,10 +22,11 @@ export class ObjsHierarchyComponent implements OnInit {
     private readonly objs_service: ObjsService,
   ) 
   {
+    this.onNew();
   }
 
   private makeTree(objects:Object[], o:Object):ObjTreeNode{
-    let val = o.properties[0].value;
+    let val = o.name;
     let name:string = (val != undefined) ? val.toString() : '';
     let children = objects.filter(
       o1 => o1.parent === o
@@ -44,6 +46,9 @@ export class ObjsHierarchyComponent implements OnInit {
   }
   onRandom() {
     this.objects = this.objs_service.getRandomStructrue();
+    this.objTree = this.objects.filter(
+      o => o.parent === this.objs_service.root
+    ).map(o1 => this.makeTree(this.objects, o1));
   }
   onClear() {
     this.objects = [];

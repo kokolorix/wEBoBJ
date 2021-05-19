@@ -40,11 +40,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ObjsHierarchyComponent } from './objs/objs-hierarchy/objs-hierarchy.component';
+import { ObjsNodeComponent } from './objs/objs-node/objs-node.component';
+import { ObjsExpPanelComponent } from './objs/objs-exp-panel/objs-exp-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ObjsHierarchyComponent
+    ObjsHierarchyComponent,
+    ObjsNodeComponent,
+    ObjsExpPanelComponent
   ],
   imports: [
     BrowserModule,
