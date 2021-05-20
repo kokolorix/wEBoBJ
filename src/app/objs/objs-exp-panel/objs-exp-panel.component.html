@@ -1,8 +1,11 @@
-<mat-expansion-panel *ngFor="let node of objTree">
-    <mat-expansion-panel-header>
-        <mat-panel-title>{{node.name}}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-accordion>
-        <app-objs-exp-panel [objTree]='node.children'></app-objs-exp-panel>
-    </mat-accordion>
-</mat-expansion-panel>
+<div *ngFor="let node of objTree">
+    <mat-expansion-panel *ngIf="node.children.length !== 0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{node.name}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-accordion>
+            <app-objs-exp-panel [objTree]='node.children'></app-objs-exp-panel>
+        </mat-accordion>
+    </mat-expansion-panel>
+    <mat-card *ngIf="node.children.length === 0">{{node.name}}</mat-card>
+</div>

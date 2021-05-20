@@ -7,6 +7,7 @@ export interface ObjTreeNode{
   name:string;
   object:Object;
   children:ObjTreeNode[];
+  selected:boolean;
 }
 @Component({
   selector: 'app-objs-hierarchy',
@@ -17,6 +18,7 @@ export class ObjsHierarchyComponent implements OnInit {
 
   objects: Object[] = [];
   objTree: ObjTreeNode[] = [];
+  selectedNode? : ObjTreeNode;
 
   constructor(
     private readonly objs_service: ObjsService,
@@ -31,7 +33,7 @@ export class ObjsHierarchyComponent implements OnInit {
     let children = objects.filter(
       o1 => o1.parent === o
       ).map( o2 => this.makeTree(objects, o2));
-    let node:ObjTreeNode = {name:name, object:o, children:children}
+    let node:ObjTreeNode = {name:name, object:o, children:children, selected:false}
     return node;
   }
 
@@ -53,6 +55,13 @@ export class ObjsHierarchyComponent implements OnInit {
   onClear() {
     this.objects = [];
     this.objTree = [];
+  }
+  onSelect(node:ObjTreeNode){
+    if(this.selectedNode)
+      this.selectedNode.selected = false;
+    this.selectedNode = node;
+    if(this.selectedNode)
+      this.selectedNode.selected = true;
   }
 
 }

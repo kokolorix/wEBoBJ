@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ObjTreeNode } from 'src/app/objs/objs-hierarchy/objs-hierarchy.component';
 
 @Component({
@@ -8,14 +8,15 @@ import { ObjTreeNode } from 'src/app/objs/objs-hierarchy/objs-hierarchy.componen
 })
 export class ObjsNodeComponent implements OnInit {
   @Input() node? : ObjTreeNode;
-  selectedNode? : ObjTreeNode;
+  @Output() selected = new EventEmitter<ObjTreeNode>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onClick( node:ObjTreeNode){
-    this.selectedNode = node;
+    this.selected.emit(node);
   }
 
 }
