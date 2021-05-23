@@ -32,13 +32,26 @@ export class ObjsService {
     ];
   }
 
+  private generateProperties(obj:  Object)
+  {
+    let cnt = Math.round(Math.random() * 10);
+     for (let i = 0; i < cnt; ++i) {
+      let value = ntw.toWords(i);
+      let name = value.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+      obj.properties[name] = value;
+     }
+  }
+
   private generateChildren(parent: Object, objs: Object[], indent: number) {
     if (indent > 2)
       return;
     let cnt = Math.round(Math.random() * 4);
 
     for (let i = 0; i < cnt; ++i) {
-      let child = new Obj(new Obj(baseObjT), { 'Name' : ntw.toWords(objs.length) }, parent);
+      let name = ntw.toWords(objs.length);
+      name = name.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+      let child = new Obj(new Obj(baseObjT), { 'Name' : name }, parent);
+      this.generateProperties(child);
       objs.push(child);
       this.generateChildren(child, objs, indent + 1);
     }

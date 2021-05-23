@@ -1,0 +1,8 @@
+<mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let o of objects">
+        <div>
+            <span>{{o.name}}</span>
+            <span style="padding-left: 1em; font-size: smaller;" *ngIf="o.parent?.name">({{o.parent?.name}})</span>
+        </div>
+    </mat-list-option>
+</mat-selection-list>

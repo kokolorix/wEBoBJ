@@ -1,0 +1,24 @@
+<mat-toolbar #toolbar color="primary" class="main-toolbar">
+    <button mat-icon-button (click)="onNew()">
+           <mat-icon>create_new_folder</mat-icon>
+           </button>
+    <button mat-icon-button color="warn" (click)="onRandom()">
+              <mat-icon>bolt</mat-icon>
+           </button>
+    <mat-button-toggle value="light" color="primary" (click)="toggleTheme()">
+        <mat-icon>lightbulb</mat-icon>
+    </mat-button-toggle>
+    <!-- <span>Object tree</span> -->
+    <span class="example-spacer"></span>
+    <button mat-icon-button>
+              <mat-icon>save</mat-icon>
+           </button>
+    <button mat-icon-button>
+              <mat-icon>download</mat-icon>
+           </button>
+    <button mat-icon-button color="accent" (click)="onClear()">
+           <mat-icon>clear</mat-icon>
+        </button>
+</mat-toolbar>
+<app-objs-hierarchy [objects]='objects' [objTree]='objTree'>
+</app-objs-hierarchy>

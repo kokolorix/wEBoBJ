@@ -1,24 +1,5 @@
-<mat-toolbar class="sticky">
-    <button mat-icon-button (click)="onNew()">
-            <mat-icon>create_new_folder</mat-icon>
-            </button>
-    <button mat-icon-button (click)="onRandom()">
-               <mat-icon>bolt</mat-icon>
-            </button>
-    <!-- <span>Object tree</span> -->
-    <span class="example-spacer"></span>
-    <button mat-icon-button>
-               <mat-icon>save</mat-icon>
-            </button>
-    <button mat-icon-button>
-               <mat-icon>download</mat-icon>
-            </button>
-    <button mat-icon-button (click)="onClear()">
-            <mat-icon>clear</mat-icon>
-         </button>
-</mat-toolbar>
 <mat-accordion>
-    <mat-expansion-panel [expanded]="true" showToggle>
+    <mat-expansion-panel showToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 Object list
@@ -26,14 +7,7 @@
             <mat-panel-description>
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-selection-list [multiple]="false">
-            <mat-list-option *ngFor="let o of objects">
-                <div>
-                    <span>{{o.name}}</span>
-                    <span style="padding-left: 1em; font-size: smaller;" *ngIf="o.parent?.name">({{o.parent?.name}})</span>
-                </div>
-            </mat-list-option>
-        </mat-selection-list>
+        <app-objs-list [objects]="objects"></app-objs-list>
     </mat-expansion-panel>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -43,10 +17,13 @@
             <app-objs-exp-panel [objTree]='objTree'></app-objs-exp-panel>
         </mat-accordion>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>Object tree 2</mat-panel-title>
         </mat-expansion-panel-header>
         <app-objs-node *ngFor="let n of objTree" [node]="n" (selected)="onSelect($event)"></app-objs-node>
     </mat-expansion-panel>
 </mat-accordion>
+<div *ngIf="selectedNode">
+    <app-obj-detail [selectedNode]='selectedNode'></app-obj-detail>
+</div>

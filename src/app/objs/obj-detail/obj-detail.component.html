@@ -1,0 +1,16 @@
+<div *ngIf="selectedNode" class="">
+    <!-- <fieldset> -->
+    <!-- <legend>{{selectedNode.name | uppercase}}</legend> -->
+    <!-- <div> <span>Name: </span>{{selectedNode.name}} -->
+    <!-- <label>Name: <input [(ngModel)]="thing.name" placeholder="name"/></label> -->
+    <!-- </div> -->
+    <div *ngFor="let p of selectedNode.properties" class="prop">
+        <!-- <div> <span>id: </span>{{p.name}}
+                <label>Name: <input [(ngModel)]="p.name" placeholder="name"/></label>
+            </div> -->
+        <label>{{p.name}}: </label>
+        <!-- <input [(ngModel)]="p.value"> -->
+        <input value={{p.value}}>
+    </div>
+    <!-- </fieldset> -->
+</div>

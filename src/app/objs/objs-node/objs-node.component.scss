@@ -1,7 +1,8 @@
+// @import '../../../styles.scss';
 .selected {
     // color: white;
-    transition: all linear 1s;
-    background-color: rgb(224, 224, 224);
+    // transition: all linear 1s;
+    background-color: gray;
 }
 
 .node {
@@ -9,6 +10,6 @@
 }
 
 .slectable:hover {
-    background-color: rgb(245, 245, 245);
+    background-color: lightgrey;
     cursor: pointer;
 }
