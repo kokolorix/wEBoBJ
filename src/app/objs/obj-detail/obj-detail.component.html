@@ -1,0 +1,19 @@
+<div *ngIf="selectedNode" class="pt-1">
+    <mat-expansion-panel [expanded]="true" showToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Object properties
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let p of selectedNode.properties" class="prop">
+            <!-- <div> <span>id: </span>{{p.name}}
+                <label>Name: <input [(ngModel)]="p.name" placeholder="name"/></label>
+            </div> -->
+            <label>{{p.name}}: </label>
+            <!-- <input [(ngModel)]="p.value"> -->
+            <input value={{p.value}}>
+        </div>
+    </mat-expansion-panel>
+</div>

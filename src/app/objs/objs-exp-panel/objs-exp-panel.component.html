@@ -1,11 +1,26 @@
 <div *ngFor="let node of objTree">
-    <mat-expansion-panel *ngIf="node.children.length !== 0">
-        <mat-expansion-panel-header>
-            <mat-panel-title>{{node.name}}</mat-panel-title>
+    <mat-expansion-panel *ngIf="node.children.length !== 0" [ngClass]="{
+            'selected': node.selected,
+            'slectable' : !node.selected
+        }">
+        <mat-expansion-panel-header (click)="onClick(node)" [ngClass]="{
+                'selected': node.selected,
+                'slectable' : !node.selected
+            }">
+            <div>
+                <mat-panel-title>{{node.name}}</mat-panel-title>
+            </div>
         </mat-expansion-panel-header>
         <mat-accordion>
-            <app-objs-exp-panel [objTree]='node.children'></app-objs-exp-panel>
+            <app-objs-exp-panel [objTree]='node.children' (selected)="onClick($event)"></app-objs-exp-panel>
         </mat-accordion>
     </mat-expansion-panel>
-    <mat-card *ngIf="node.children.length === 0">{{node.name}}</mat-card>
+    <mat-card *ngIf="node.children.length === 0" (click)="onClick(node)" [ngClass]="{
+            'selected': node.selected,
+            'slectable' : !node.selected
+        }">
+        <div>
+            <span>{{node.name}}</span>
+        </div>
+    </mat-card>
 </div>

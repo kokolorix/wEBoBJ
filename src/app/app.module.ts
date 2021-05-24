@@ -38,21 +38,29 @@ import { MatTreeModule } from '@angular/material/tree';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ObjsHierarchyComponent } from './objs/objs-hierarchy/objs-hierarchy.component';
 import { ObjsNodeComponent } from './objs/objs-node/objs-node.component';
 import { ObjsExpPanelComponent } from './objs/objs-exp-panel/objs-exp-panel.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ObjsListComponent } from './objs/objs-list/objs-list.component';
+import { ObjDetailComponent } from './objs/obj-detail/obj-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ObjsHierarchyComponent,
     ObjsNodeComponent,
-    ObjsExpPanelComponent
+    ObjsExpPanelComponent,
+    DashboardComponent,
+    ObjsListComponent,
+    ObjDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,

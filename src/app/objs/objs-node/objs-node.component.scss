@@ -1,14 +1,14 @@
-.selected {
-    // color: white;
-    transition: all linear 1s;
-    background-color: rgb(224, 224, 224);
-}
-
+// @import '../../../styles.scss';
 .node {
     padding: auto;
 }
 
+.selected {
+    transition: all linear 0.7s;
+    background-color: gray;
+}
+
 .slectable:hover {
-    background-color: rgb(245, 245, 245);
+    background-color: lightgrey;
     cursor: pointer;
 }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ObjsHierarchyComponent } from './objs-hierarchy.component';
+import { ObjDetailComponent } from './obj-detail.component';
 
-describe('ObjsHierarchyComponent', () => {
-  let component: ObjsHierarchyComponent;
-  let fixture: ComponentFixture<ObjsHierarchyComponent>;
+describe('ObjDetailComponent', () => {
+  let component: ObjDetailComponent;
+  let fixture: ComponentFixture<ObjDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ObjsHierarchyComponent ]
+      declarations: [ ObjDetailComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ObjsHierarchyComponent);
+    fixture = TestBed.createComponent(ObjDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

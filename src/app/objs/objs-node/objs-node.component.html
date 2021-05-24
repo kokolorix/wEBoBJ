@@ -1,7 +1,13 @@
 <div *ngIf="node" style="padding-left: 1em">
-    <div [ngClass]="{
+    <!-- <div [ngClass]="{
         'selected': node.selected,
         'slectable' : !node.selected
-    }" class="node" (click)="onClick(node)">{{node.name}}</div>
+    }" class="node p-1" (click)="onClick(node)">{{node.name}}</div> -->
+    <mat-card [ngClass]="{
+        'selected': node.selected,
+        'slectable' : !node.selected
+    }" (click)="onClick(node)">
+        {{node.name}}
+    </mat-card>
     <app-objs-node *ngFor="let n of node.children" [node]="n" (selected)="onClick($event)"></app-objs-node>
 </div>

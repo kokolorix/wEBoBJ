@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ObjsServiceService as ObjsService } from './objs.service';
+import { ObjsService } from './objs.service';
 import { Object as Object, Obj, rootBaseT, baseObjT } from 'src/app/shared/object';
 
 describe('ObjsServiceService', () => {
