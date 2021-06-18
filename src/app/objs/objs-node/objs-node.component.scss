@@ -12,3 +12,68 @@
     background-color: lightgrey;
     cursor: pointer;
 }
+
+.circle {
+    fill: #6aaf2c;
+}
+
+.icon {
+    margin-right: 0.25rem;
+    // background-color: orchid;
+}
+
+.circle:hover {
+    fill: orange;
+}
+
+
+.hook {
+    fill: white;
+}
+// .hook:hover {
+//     fill: black;
+// }
+
+.file{
+    margin-left: 0.5rem;    
+    width: 100%;
+}
+.rect{
+    fill: none;
+    stroke: #dee1e5;
+    stroke-width: 4px;
+    stroke-dasharray: 4 4;
+    // width: 100%;
+}
+
+.content{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.file_border{
+    margin-left: 0.5rem;    
+    width: 100%;
+    border: #dee1e5;
+    border-style: dashed;
+    border-width: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px;
+    min-width: 160px;
+}
+
+.file_icon{
+    fill: #348e7a;
+    margin-right: 11px;
+}
+
+.file_text{
+    color: #348e7a;
+    font-size: 16px;
+    font-family: Inter;
+    letter-spacing: 0.018em;
+    // text-align: center;
+}
