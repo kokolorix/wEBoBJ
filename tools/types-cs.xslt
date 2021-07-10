@@ -15,7 +15,7 @@
 	<!--=======================================================================-->
 	<xsl:template match="/">
 		<xsl:variable name="file" select="replace(tokenize(base-uri(.), '/')[last()],'.xml','')"/>
-		<xsl:variable name="fn" select="replace(base-uri(.),'.xml' ,'.ts')"/>
+		<xsl:variable name="fn" select="replace(base-uri(.),'.xml' ,'.cs')"/>
 		<xsl:result-document href="{$fn}" format="text-def">
 			<xsl:apply-templates select="Types/ObjectType" mode="types"/>
 		</xsl:result-document>
